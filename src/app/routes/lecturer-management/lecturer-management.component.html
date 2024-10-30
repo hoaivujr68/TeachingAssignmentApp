@@ -1,0 +1,128 @@
+<div style="height: 90vh">
+  <div class="breadcrumb-container">
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>
+        <a>QUẢN LÝ DỮ LIỆU</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item> Quản lý giảng viên </nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </div>
+  <nz-divider></nz-divider>
+  <div class="filter-container">
+    <div nz-row nzGutter="16">
+      <div nz-col nzSpan="6">
+        <input class="custom-boder" nz-input placeholder="Tìm kiếm theo tên" />
+      </div>
+      <div nz-col nzSpan="4">
+        <nz-select
+          class="w-100"
+          [(ngModel)]="mode"
+          (ngModelChange)="handleChangeModeView($event)"
+          nzAllowClear="false"
+        >
+          <nz-option
+            *ngFor="let item of listModeView"
+            [nzValue]="item.value"
+            [nzLabel]="item.label"
+          >
+          </nz-option>
+        </nz-select>
+      </div>
+      <div nz-col nzSpan="14" class="d-flex justify-content-end">
+        <app-button-base
+          *ngIf="setOfCheckedId.size === 1"
+          titleTooltip="Sửa"
+          iconClass="fa-solid fa-pen-to-square"
+          tooltipPlacement="topRight"
+          [isShowTooltip]="true"
+        >
+        </app-button-base>
+        <app-button-base
+          *ngIf="checked || indeterminate"
+          titleTooltip="Xóa"
+          [danger]="true"
+          iconClass="far fa-trash-alt"
+          tooltipPlacement="topRight"
+          [isShowTooltip]="true"
+        >
+        </app-button-base>
+        <app-button-base
+          iconClass="fas fa-download"
+          titleTooltip="Xuất Excel"
+          [isShowTooltip]="true"
+        >
+        </app-button-base>
+        <app-button-base
+          iconClass="fa-solid fa-rotate-right"
+          titleTooltip="Tải lại"
+          [isShowTooltip]="true"
+        >
+        </app-button-base>
+      </div>
+    </div>
+  </div>
+  <div class="table-container pt-2">
+    <nz-table
+      #basicTable
+      [nzData]="listOfData"
+      [nzBordered]="false"
+      [nzFrontPagination]="false"
+      [nzShowPagination]="false"
+      [nzScroll]="{ y: scrollY }"
+      [nzFooter]="footer"
+    >
+      <thead>
+        <tr>
+          <th
+            nzWidth="3%"
+            [(nzChecked)]="checked"
+            [nzIndeterminate]="indeterminate"
+            (nzCheckedChange)="onAllChecked($event)"
+          ></th>
+          <th nzWidth="7%">Mã</th>
+          <th nzWidth="15%">Tên giảng viên</th>
+          <th *ngIf="mode === 'specialty'" class="text-center" nzWidth="auto">
+            Nhóm chuyên môn
+          </th>
+          <th *ngIf="mode === 'subject'" class="text-center" nzWidth="auto">
+            Môn học có thể dạy
+          </th>
+          <th class="text-center" nzWidth="20%">GD giảng dạy</th>
+          <th class="text-center" nzWidth="15%">GD hướng dẫn đồ án</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td
+            [nzChecked]="setOfCheckedId.has(data.id)"
+            (nzCheckedChange)="onItemChecked(data.id, $event)"
+          ></td>
+          <td>{{ data.id }}</td>
+          <td>{{ data.name }}</td>
+          <td *ngIf="mode === 'specialty'">
+            <ng-container
+              *ngFor="let item of data.specialty.split(','); let i = index"
+            >
+              <span class="specialty-tag custom-boder">{{ item.trim() }}</span>
+              <!-- <ng-container *ngIf="i < data.specialty.split(',').length - 1">, </ng-container> -->
+            </ng-container>
+          </td>
+          <td *ngIf="mode === 'subject'">
+            <ng-container
+              *ngFor="let item of data.subject.split(','); let i = index"
+            >
+              <span class="specialty-tag custom-boder">{{ item.trim() }}</span>
+              <!-- <ng-container *ngIf="i < data.specialty.split(',').length - 1">, </ng-container> -->
+            </ng-container>
+          </td>
+          <td class="text-center">{{ data.gdTeaching }}</td>
+          <td class="text-center">{{ data.gdInstruct }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <ng-template #footer>
+    <app-footer-table [page]="1" [size]="20" [total]="110"></app-footer-table>
+  </ng-template>
+</div>

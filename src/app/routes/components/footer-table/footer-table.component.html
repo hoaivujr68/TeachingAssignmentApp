@@ -1,0 +1,21 @@
+<ng-container>
+  <div>
+    <div nz-row class="pb-2 pl-3 pt-1">
+      <div nz-col nzSpan="12">
+        <div class="ml-2 mt-2">
+        </div>
+      </div>
+      <div nz-col nzSpan="11" class="text-end">
+        <ng-container>
+          <app-pagination
+            [pageSize]="size"
+            [pageIndex]="page"
+            [total]="total"
+            (pageIndexChange)="nzPageIndexChange($event)"
+          >
+          </app-pagination>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-container>
