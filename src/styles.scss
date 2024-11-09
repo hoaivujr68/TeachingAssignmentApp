@@ -1,3 +1,12 @@
+// @import "../node_modules//ng-zorro-antd/ng-zorro-antd.css";
+// @import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
+
+:root {
+  --ant-primary-color: #286090;
+}
+
+@import "../node_modules//ng-zorro-antd/ng-zorro-antd.css";
+
 .color-button {
   color: #fff;
   background-color: #286090;

@@ -6,7 +6,7 @@
   (nzPageIndexChange)="nzPageIndexChange($event)"
   [nzShowTotal]="totalTemplate"
   [nzTotal]="total"
->
+>{{ 1+2}}
 </nz-pagination>
 <ng-template #totalTemplate let-total>
   {{ pageSize * (pageIndex - 1) + 1 | number : '1.0-0' }} -

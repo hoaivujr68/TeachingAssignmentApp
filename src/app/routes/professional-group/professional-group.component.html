@@ -4,7 +4,7 @@
       <nz-breadcrumb-item>
         <a>QUẢN LÝ DỮ LIỆU</a>
       </nz-breadcrumb-item>
-      <nz-breadcrumb-item> Quản lý giảng viên </nz-breadcrumb-item>
+      <nz-breadcrumb-item> Quản lý nhóm chuyên môn </nz-breadcrumb-item>
     </nz-breadcrumb>
   </div>
   <nz-divider></nz-divider>
@@ -30,7 +30,7 @@
       </div>
       <div nz-col nzSpan="14" class="d-flex justify-content-end">
         <app-button-base
-          titleTooltip="Thêm giảng viên"
+          titleTooltip="Thêm nhóm chuyên môn"
           iconClass="fa-solid fa-user-plus"
           tooltipPlacement="topRight"
           [isShowTooltip]="true"
@@ -63,41 +63,24 @@
     >
       <thead>
         <tr>
-          <th nzWidth="15%">Tên giảng viên</th>
-          <th *ngIf="mode === 'specialty'" class="text-center" nzWidth="auto">
-            Nhóm chuyên môn
-          </th>
-          <th *ngIf="mode === 'subject'" class="text-center" nzWidth="auto">
-            Môn học có thể dạy
-          </th>
-          <th class="text-center" nzWidth="12%">GD giảng dạy</th>
-          <th class="text-center" nzWidth="15%">GD hướng dẫn đồ án</th>
+          <th nzWidth="auto">Tên nhóm chuyên môn</th>
+          <th class="text-center" nzWidth="auto">Môn học</th>
           <th class="text-center" nzWidth="10%">Hành động</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
           <td>{{ data?.name }}</td>
-          <td *ngIf="mode === 'specialty'">
-            <ng-container
-              *ngFor="let item of data.professionalGroup; let i = index"
-            >
-              <span class="specialty-tag custom-boder">{{ item?.name.trim() }}</span>
-              <ng-container *ngIf="i < data.professionalGroup.length - 1">, </ng-container>
-            </ng-container>
-          </td>
-          <td *ngIf="mode === 'subject'">
-            <ng-container
-              *ngFor="let item of data.professionalGroup; let i = index"
-            >
-              <ng-container *ngFor="let itemChild of item.listCourse; let j = index">
-                <span class="specialty-tag custom-boder">{{ itemChild?.name.trim() }}</span>
-                <ng-container *ngIf="i < item.listCourse.length - 1">, </ng-container>
+          <td>
+            <ng-container *ngFor="let item of data.listCourse; let i = index">
+              <span class="specialty-tag custom-boder">{{
+                item?.name.trim()
+              }}</span>
+              <ng-container *ngIf="i < data.listCourse.length - 1"
+                >,
               </ng-container>
             </ng-container>
           </td>
-          <td class="text-center">{{ data?.gdTeaching }}</td>
-          <td class="text-center">{{ data?.gdInstruct }}</td>
           <td>
             <div class="d-flex justify-content-center">
               <app-button-base
@@ -123,6 +106,11 @@
   </div>
 
   <ng-template #footer>
-    <app-footer-table [size]="request.size" [page]="request.page" [total]="total" (onPageIndexChange)="nzPageIndexChange($event)"></app-footer-table>
+    <app-footer-table
+      [size]="request.size"
+      [page]="request.page"
+      [total]="total"
+      (onPageIndexChange)="nzPageIndexChange($event)"
+    ></app-footer-table>
   </ng-template>
 </div>
