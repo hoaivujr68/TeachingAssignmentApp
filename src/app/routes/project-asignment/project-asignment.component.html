@@ -4,7 +4,7 @@
       <nz-breadcrumb-item>
         <a>QUẢN LÝ DỮ LIỆU</a>
       </nz-breadcrumb-item>
-      <nz-breadcrumb-item> Quản lý nhóm chuyên môn </nz-breadcrumb-item>
+      <nz-breadcrumb-item> Phân công hướng dẫn đồ án </nz-breadcrumb-item>
     </nz-breadcrumb>
   </div>
   <nz-divider></nz-divider>
@@ -23,10 +23,11 @@
       <div nz-col nzSpan="4"></div>
       <div nz-col nzSpan="14" class="d-flex justify-content-end">
         <app-button-base
-          titleTooltip="Thêm nhóm chuyên môn"
-          iconClass="fa-solid fa-user-plus"
+          titleTooltip="Phân công"
+          iconClass="fa-solid fa-chalkboard-user"
           tooltipPlacement="topRight"
           [isShowTooltip]="true"
+          (onClick)="hanleClick($event)"
         >
         </app-button-base>
         <app-button-base
@@ -58,24 +59,23 @@
     >
       <thead>
         <tr>
-          <th nzWidth="auto">Tên nhóm chuyên môn</th>
-          <th class="text-center" nzWidth="auto">Môn học</th>
+          <th nzWidth="12%">Mã Giảng viên</th>
+          <th class="text-left" nzWidth="12%">Tên giảng viên</th>
+          <th class="text-left" nzWidth="10%">Mã sinh viên</th>
+          <th class="text-center" nzWidth="12%">Tên sinh viên</th>
+          <th class="text-left" nzWidth="auto">Đề tài</th>
+          <th class="text-left" nzWidth="8%">Mã đồ án</th>
           <th class="text-center" nzWidth="10%">Hành động</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
-          <td>{{ data?.name }}</td>
-          <td>
-            <ng-container *ngFor="let item of data.listCourse; let i = index">
-              <span class="specialty-tag custom-boder">{{
-                item?.name.trim()
-              }}</span>
-              <ng-container *ngIf="i < data.listCourse.length - 1"
-                >,
-              </ng-container>
-            </ng-container>
-          </td>
+          <td>{{ data?.teacherCode }}</td>
+          <td>{{ data?.teacherName }}</td>
+          <td>{{ data?.studentId }}</td>
+          <td class="text-center">{{ data?.studentName }}</td>
+          <td>{{ data?.topic }}</td>
+          <td>{{ data?.className }}</td>
           <td>
             <div class="d-flex justify-content-center">
               <app-button-base

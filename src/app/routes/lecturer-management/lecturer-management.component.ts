@@ -13,6 +13,7 @@ interface Teacher {
   styleUrls: ['./lecturer-management.component.scss']
 })
 export class LecturerManagementComponent {
+  isLoadingTable: boolean = false;
   mode: string = 'specialty';
   total = 0;
   scrollY: string = 'calc(100vh - 240px)';
@@ -20,12 +21,13 @@ export class LecturerManagementComponent {
     page: 1,
     size: 20,
     sort: '',
+    listTextSearch: []
   };
   listModeView = [
     {
       label: 'Nhóm chuyên môn',
       value: 'specialty',
-    },    
+    },
     {
       label: 'Môn học có thể dạy',
       value: 'subject',
@@ -35,30 +37,37 @@ export class LecturerManagementComponent {
   listOfData = [];
   listOfSpecialties = [];
 
-  constructor(public lecturerServiceService: LecturerServiceService){}
+  constructor(public lecturerServiceService: LecturerServiceService) { }
 
-  async ngOnInit(){
+  async ngOnInit() {
     await this.fetchData();
   }
 
-  buildQueryString(): string {
+  buildQueryString() {
     const queryModel = {
+      listTextSearch: this.request.listTextSearch,
+      pageSize: this.request.size,
+      currentPage: this.request.page,
+      name: '',
+      code: ''
     };
-    return JSON.stringify(queryModel);
+    return queryModel;
   }
 
-  async fetchData(){
+  async fetchData() {
+    this.isLoadingTable = true;
     const queryString = this.buildQueryString();
-    await this.lecturerServiceService.getTeacher(this.request.page, this.request.size, queryString)
-    .toPromise()
-    .then((res: any) => {
-      if (res) {
-        this.listOfData = cloneDeep(res.content);
-        this.total = res.totalRecords;
-      }
-    })
-    .finally(() => {
-    });
+    await this.lecturerServiceService.getTeacherFilter(queryString)
+      .toPromise()
+      .then((res: any) => {
+        if (res) {
+          this.listOfData = cloneDeep(res.content);
+          this.total = res.totalRecords;
+        }
+      })
+      .finally(() => {
+        this.isLoadingTable = false;
+      });
   }
 
   ngAfterViewInit() {
@@ -68,13 +77,13 @@ export class LecturerManagementComponent {
       (this.tableBodyElement as HTMLElement).style.minHeight = 'calc(100vh - 240px)';
     }
   }
-  
+
   calculateHeightBodyTable() {
     this.scrollY = `calc(100vh - 240px)`;
   }
 
-  handleChangeModeView(ev: any){
-    if(ev){
+  handleChangeModeView(ev: any) {
+    if (ev) {
       this.mode = ev;
     }
   }
@@ -85,6 +94,15 @@ export class LecturerManagementComponent {
     setTimeout(() => {
       if (this.tableBodyElement && this.tableBodyElement.scrollTop) this.tableBodyElement.scrollTop = 0;
     }, 50);
+  }
+
+  async handleReload(ev: any) {
+    await this.fetchData();
+  }
+
+  async nzOnSearch(ev: any) {
+    this.request.page = 1;
+    await this.fetchData();
   }
 
 }

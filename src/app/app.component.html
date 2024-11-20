@@ -32,26 +32,35 @@
             <a routerLink="/lecturer/project-management">Quản lý đồ án</a>
           </li>
           <li nz-menu-item nzMatchRouter>
+            <a routerLink="/lecturer/aspiration-management">Quản lý nguyện vọng</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
             <a routerLink="/lecturer/professional-group-management">Quản lý nhóm chuyên môn</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>Quản lý thời khóa biểu</a>
+            <a routerLink="/lecturer/class-management">Quản lý thời khóa biểu</a>
           </li>
         </ul>
       </li>
       <li nz-submenu nzTitle="PHÂN CÔNG GIẢNG VIÊN" nzIcon="solution">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a>Giảng dạy</a>
+            <a routerLink="/lecturer/teaching-assignment">Giảng dạy</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>Hướng dẫn đồ án</a>
+            <a routerLink="/lecturer/project-assignment">Hướng dẫn đồ án</a>
           </li>
         </ul>
       </li>
-      <li nz-menu-item class="d-flex align-items-center">
-        <span nz-icon nzType="verified"></span>
-        <span>KIỂM TRA PHÂN CÔNG</span>
+      <li nz-submenu nzTitle="KIỂM TRA PHÂN CÔNG" nzIcon="verified">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/lecturer/teaching-not-assignment">Lớp chưa được phân công</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/lecturer/project-not-assignment">Nguyện vọng chưa được phân công</a>
+          </li>
+        </ul>
       </li>
       <li nz-menu-item class="d-flex align-items-center">
         <span nz-icon nzType="setting"></span>

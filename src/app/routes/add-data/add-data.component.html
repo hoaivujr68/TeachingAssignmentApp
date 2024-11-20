@@ -1,60 +1,81 @@
-<nz-card nzTitle="Danh sách lớp">
-  <nz-upload
-    nzType="drag"
-    [nzMultiple]="true"
-    nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-    (nzChange)="handleChange($event)"
-  >
-    <p class="ant-upload-drag-icon">
-      <span nz-icon nzType="upload" style="color: #286090"></span>
-    </p>
-    <p class="ant-upload-text">
-      Kéo thả hoặc click chuột vào đây để tải tài liệu lên
-    </p>
-  </nz-upload>
-</nz-card>
-<nz-card nzTitle="Danh sách nhóm chuyên môn">
-  <nz-upload
-    nzType="drag"
-    [nzMultiple]="true"
-    nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-    (nzChange)="handleChange($event)"
-  >
-    <p class="ant-upload-drag-icon">
-      <span nz-icon nzType="upload" style="color: #286090"></span>
-    </p>
-    <p class="ant-upload-text">
-      Kéo thả hoặc click chuột vào đây để tải tài liệu lên
-    </p>
-  </nz-upload>
-</nz-card>
-<nz-card nzTitle="Danh sách đồ án">
-  <nz-upload
-    nzType="drag"
-    [nzMultiple]="true"
-    nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-    (nzChange)="handleChange($event)"
-  >
-    <p class="ant-upload-drag-icon">
-      <span nz-icon nzType="upload" style="color: #286090"></span>
-    </p>
-    <p class="ant-upload-text">
-      Kéo thả hoặc click chuột vào đây để tải tài liệu lên
-    </p>
-  </nz-upload>
-</nz-card>
-<nz-card nzTitle="Thời khóa biểu">
-  <nz-upload
-    nzType="drag"
-    [nzMultiple]="true"
-    nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-    (nzChange)="handleChange($event)"
-  >
-    <p class="ant-upload-drag-icon">
-      <span nz-icon nzType="upload" style="color: #286090"></span>
-    </p>
-    <p class="ant-upload-text">
-      Kéo thả hoặc click chuột vào đây để tải tài liệu lên
-    </p>
-  </nz-upload>
-</nz-card>
+<div style="height: 90vh; overflow: auto;">
+  <nz-card nzTitle="Khối lượng giảng dạy">
+    <nz-upload
+      nzType="drag"
+      [nzMultiple]="true"
+      nzAction="https://localhost:7286/api/teacher/import"
+      (nzChange)="handleChange($event)"
+    >
+      <p class="ant-upload-drag-icon">
+        <span nz-icon nzType="upload" style="color: #286090"></span>
+      </p>
+      <p class="ant-upload-text">
+        Kéo thả hoặc click chuột vào đây để tải tài liệu lên
+      </p>
+    </nz-upload>
+  </nz-card>
+
+  <nz-card nzTitle="Danh sách lớp học">
+    <nz-upload
+      nzType="drag"
+      [nzMultiple]="true"
+      nzAction="https://localhost:7286/api/class/import"
+      (nzChange)="handleChange($event)"
+    >
+      <p class="ant-upload-drag-icon">
+        <span nz-icon nzType="upload" style="color: #286090"></span>
+      </p>
+      <p class="ant-upload-text">
+        Kéo thả hoặc click chuột vào đây để tải tài liệu lên
+      </p>
+    </nz-upload>
+  </nz-card>
+  
+  <nz-card nzTitle="Danh sách đồ án">
+    <nz-upload
+      nzType="drag"
+      [nzMultiple]="true"
+      nzAction="https://localhost:7286/api/project/import"
+      (nzChange)="handleChange($event)"
+    >
+      <p class="ant-upload-drag-icon">
+        <span nz-icon nzType="upload" style="color: #286090"></span>
+      </p>
+      <p class="ant-upload-text">
+        Kéo thả hoặc click chuột vào đây để tải tài liệu lên
+      </p>
+    </nz-upload>
+  </nz-card>
+
+  <nz-card nzTitle="Nguyện vọng">
+    <nz-upload
+      nzType="drag"
+      [nzMultiple]="true"
+      nzAction="https://localhost:7286/api/aspiration/import"
+      (nzChange)="handleChange($event)"
+    >
+      <p class="ant-upload-drag-icon">
+        <span nz-icon nzType="upload" style="color: #286090"></span>
+      </p>
+      <p class="ant-upload-text">
+        Kéo thả hoặc click chuột vào đây để tải tài liệu lên
+      </p>
+    </nz-upload>
+  </nz-card>
+
+  <nz-card nzTitle="Nhóm chuyên môn">
+    <nz-upload
+      nzType="drag"
+      [nzMultiple]="true"
+      nzAction="https://localhost:7286/api/professional-group/import"
+      (nzChange)="handleChange($event)"
+    >
+      <p class="ant-upload-drag-icon">
+        <span nz-icon nzType="upload" style="color: #286090"></span>
+      </p>
+      <p class="ant-upload-text">
+        Kéo thả hoặc click chuột vào đây để tải tài liệu lên
+      </p>
+    </nz-upload>
+  </nz-card>
+</div>

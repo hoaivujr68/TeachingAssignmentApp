@@ -1,21 +1,21 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LecturerServiceService {
+export class AspirationService {
   url: string = '';
   constructor(private httpClient: HttpClient) {
-    this.url = 'https://localhost:7286/api/teacher';
+    this.url = 'https://localhost:7286/api/aspiration';
   }
 
-  getTeacher(page: number, size: number, queryString: string,): Observable<any> {
+  getAllAspiration(page: number, size: number, queryString: string,): Observable<any> {
     return this.httpClient.get(this.url + '?page=' + page + '&size=' + size + '&filter=' +queryString);
   }
 
-  getTeacherFilter(payload: any): Observable<any> {
+  getAspirationFilter(payload: any): Observable<any> {
     return this.httpClient.post(this.url + '/filter', payload);
   }
 

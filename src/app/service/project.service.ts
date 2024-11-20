@@ -5,17 +5,17 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProfessionalGroupService {
+export class ProjectService {
   url: string = '';
   constructor(private httpClient: HttpClient) {
-    this.url = 'https://localhost:7286/api/professional-group';
+    this.url = 'https://localhost:7286/api/project';
   }
 
-  getProfessionalGroup(page: number, size: number, queryString: string,): Observable<any> {
+  getAllProject(page: number, size: number, queryString: string,): Observable<any> {
     return this.httpClient.get(this.url + '?page=' + page + '&size=' + size + '&filter=' +queryString);
   }
 
-  getProfessionalGroupFilter(payload: any): Observable<any> {
+  getProjectFilter(payload: any): Observable<any> {
     return this.httpClient.post(this.url + '/filter', payload);
   }
 }

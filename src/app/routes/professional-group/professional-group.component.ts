@@ -18,8 +18,9 @@ export class ProfessionalGroupComponent extends LecturerManagementComponent {
   }
 
   async fetchData() {
+    this.isLoadingTable = true;
     const queryString = this.buildQueryString();
-    await this.professionalGroupService.getProfessionalGroup(this.request.page, this.request.size, queryString)
+    await this.professionalGroupService.getProfessionalGroupFilter(queryString)
       .toPromise()
       .then((res: any) => {
         if (res) {
@@ -40,6 +41,7 @@ export class ProfessionalGroupComponent extends LecturerManagementComponent {
         }
       })
       .finally(() => {
+        this.isLoadingTable = false;
       });
   }
 }
