@@ -1,0 +1,86 @@
+.custom {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5; /* Màu nền nhẹ */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    
+    
+    .login-form, .register-form {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #286090; /* Màu tiêu đề */
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block; /* Hiển thị label trên một dòng riêng biệt */
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    
+    input {
+      display: block; /* Hiển thị input trên một dòng riêng biệt */
+      width: 100%; /* Đảm bảo input chiếm toàn bộ chiều rộng */
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    input:focus {
+      border-color: #286090;
+      outline: none;
+    }
+    
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #286090;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    button:hover {
+      background-color: #204d74;
+    }
+    a {
+      display: block; /* Đảm bảo thẻ a là khối để margin hoạt động chính xác */
+      text-align: left;
+      color: #286090;
+      text-decoration: none;
+      font-size: 14px;
+      margin-top: 12px; /* Tăng khoảng cách giữa nút và link */
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    .login-form {
+      border-top: 4px solid #286090; /* Viền trên màu xanh */
+    }
+    
+    button {
+      background-color: #337ab7; /* Màu nút login */
+    }
+    
+    

@@ -15,6 +15,22 @@
     </nz-upload>
   </nz-card>
 
+  <nz-card nzTitle="Nhóm chuyên môn">
+    <nz-upload
+      nzType="drag"
+      [nzMultiple]="true"
+      nzAction="https://localhost:7286/api/professional-group/import"
+      (nzChange)="handleChange($event)"
+    >
+      <p class="ant-upload-drag-icon">
+        <span nz-icon nzType="upload" style="color: #286090"></span>
+      </p>
+      <p class="ant-upload-text">
+        Kéo thả hoặc click chuột vào đây để tải tài liệu lên
+      </p>
+    </nz-upload>
+  </nz-card>
+
   <nz-card nzTitle="Danh sách lớp học">
     <nz-upload
       nzType="drag"
@@ -52,22 +68,6 @@
       nzType="drag"
       [nzMultiple]="true"
       nzAction="https://localhost:7286/api/aspiration/import"
-      (nzChange)="handleChange($event)"
-    >
-      <p class="ant-upload-drag-icon">
-        <span nz-icon nzType="upload" style="color: #286090"></span>
-      </p>
-      <p class="ant-upload-text">
-        Kéo thả hoặc click chuột vào đây để tải tài liệu lên
-      </p>
-    </nz-upload>
-  </nz-card>
-
-  <nz-card nzTitle="Nhóm chuyên môn">
-    <nz-upload
-      nzType="drag"
-      [nzMultiple]="true"
-      nzAction="https://localhost:7286/api/professional-group/import"
       (nzChange)="handleChange($event)"
     >
       <p class="ant-upload-drag-icon">

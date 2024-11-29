@@ -15,6 +15,10 @@ import { ProjectAsignmentComponent } from './project-asignment/project-asignment
 import { TeachingNotAssignmentComponent } from './teaching-not-assignment/teaching-not-assignment.component';
 import { AspirationNotAssignmentComponent } from './aspiration-not-assignment/aspiration-not-assignment.component';
 import { AspirationManagementComponent } from './aspiration-management/aspiration-management.component';
+import { UserRegisterComponent } from './user-register/user-register.component';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { BlankLayoutComponent } from './blank-layout/blank-layout.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { AspirationManagementComponent } from './aspiration-management/aspiratio
     ProjectAsignmentComponent,
     TeachingNotAssignmentComponent,
     AspirationNotAssignmentComponent,
-    AspirationManagementComponent
+    AspirationManagementComponent,
+    UserRegisterComponent,
+    UserLoginComponent,
+    MainLayoutComponent,
+    BlankLayoutComponent
   ],
   imports: [
     CommonModule,

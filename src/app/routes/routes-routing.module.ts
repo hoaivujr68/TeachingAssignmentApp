@@ -13,8 +13,6 @@ import { AspirationNotAssignmentComponent } from './aspiration-not-assignment/as
 import { AspirationManagementComponent } from './aspiration-management/aspiration-management.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
   { path: 'lecturer-management', component: LecturerManagementComponent },
   { path: 'project-management', component: ProjectManagementComponent },
   { path: 'professional-group-management', component: ProfessionalGroupComponent },
