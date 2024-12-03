@@ -18,11 +18,15 @@
   <div nz-row nzGutter="16">
     <div *ngFor="let item of leftSideData" nz-col nzSpan="6" style="padding-bottom: 8px;">
       <nz-card style="height: 16vh;">
-        <div style="height: 6vh" class="text-center">
+        <div style="height: 3vh" class="text-center">
           {{ item?.label }}
         </div>
-        <div style="height: 6vh" class="text-center font-sz30">
+        <div style="height: 5vh" class="text-center font-sz30">
           <strong>{{ item?.numeric }}</strong>
+        </div>
+        <div style="height: 8vh">
+          <nz-divider style="margin-top: 16px; margin-bottom: 12px"></nz-divider>
+          <strong style="position: absolute; bottom: 0.8vh; color: #286090" class="color-base text-left cursor-pointer" (click)="handleClick(item)">Xem chi tiết</strong>
         </div>
       </nz-card>
     </div>
@@ -39,11 +43,11 @@
       </nz-card>
     </div>
   </div>
-  <div nz-row nzGutter="16">
+  <!-- <div nz-row nzGutter="16">
     <div nz-col nzSpan="24">
       <nz-card style="height: 45vh;">
         <canvas id="myChart3"></canvas>
       </nz-card>
     </div>
-  </div>
+  </div> -->
 </div>

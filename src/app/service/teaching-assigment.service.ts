@@ -50,5 +50,12 @@ export class TeachingAssigmentService {
       headers: this.createHeaders()
     });
   }
+
+  exportTeachingAssignment() {
+    return this.httpClient.get(this.url + '/export', {
+      headers: this.createHeaders(),
+      responseType: 'blob' 
+    });
+  }
 }
 

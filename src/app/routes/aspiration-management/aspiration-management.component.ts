@@ -17,6 +17,18 @@ export class AspirationManagementComponent extends LecturerManagementComponent {
     super(lecturerServiceService);
   }
 
+  ngAfterViewInit() {
+    this.calculateHeightBodyTable();
+    this.tableBodyElement = document.getElementsByTagName('nz-table-inner-scroll')[0];
+    if (this.tableBodyElement) {
+      (this.tableBodyElement as HTMLElement).style.minHeight = 'calc(100vh - 250px)';
+    }
+  }
+
+  calculateHeightBodyTable() {
+    this.scrollY = `calc(100vh - 250px)`;
+  }
+
   async fetchData() {
     this.isLoadingTable = true;
     const queryString = this.buildQueryString();

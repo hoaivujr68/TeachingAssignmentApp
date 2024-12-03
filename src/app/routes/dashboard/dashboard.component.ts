@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
@@ -29,34 +30,42 @@ export class DashboardComponent {
     {
       label: 'Số giảng viên cần phân công',
       numeric: 49,
+      type: 'lecturer-management'
     },
     {
       label: 'Số lượng nhóm chuyên môn',
       numeric: 46,
+      type: 'professional-group-management'
     },
     {
       label: 'Số lượng lớp học',
       numeric: 159,
+      type: 'class-management'
     },
     {
       label: 'Số lượng nguyện vọng',
       numeric: 882,
+      type: 'aspiration-management'
     },
     {
       label: 'Số lượng lớp không được phân công',
       numeric: 0,
+      type: 'teaching-not-assignment'
     },
     {
-      label: 'Số lượng giáo viên không được phân công giảng dạy',
+      label: 'Số lượng GV không được PC giảng dạy',
       numeric: 0,
+      type: 'project-not-assignment'
     },
     {
-      label: 'Số lượng nguyện vọng không được phân công',
+      label: 'Số lượng NV không được phân công',
       numeric: 0,
+      type: 'project-not-assignment'
     },
     {
-      label: 'Số lượng giáo viên không được phân công hướng dẫn',
+      label: 'Số lượng GV không được PC hướng dẫn',
       numeric: 0,
+      type: 'project-not-assignment'
     },
   ]
 
@@ -112,12 +121,12 @@ export class DashboardComponent {
     { "TeacherCode": "GV029", "TeacherName": "Phạm Quang Dũng", "TotalGdInstruct": 0.8 }
   ]
     ;
-  constructor() { }
+  constructor(protected router: Router) { }
 
   ngAfterViewInit(): void {
     this.initChar1();
     this.initChar2();
-    this.initChar3();
+    // this.initChar3();
   }
   initChar1() {
     const ctx = document.getElementById('myChart1') as HTMLCanvasElement;
@@ -277,6 +286,13 @@ export class DashboardComponent {
         }
       }
     });
+  }
+
+  handleClick(item: any) {
+    if (item) {
+      const type = item.type;
+      this.router.navigate([`/lecturer/${type}`]);
+    }
   }
 }
 

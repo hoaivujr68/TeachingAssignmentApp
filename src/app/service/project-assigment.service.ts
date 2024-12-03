@@ -35,4 +35,13 @@ export class ProjectAssigmentService {
   projectAssignment(){
     return this.httpClient.get('https://localhost:7286/api/assignment/aspirating');
   }
+
+  exportProjectAssignment() {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.httpClient.get(this.url + '/export', {
+      headers,
+      responseType: 'blob'  // Đảm bảo API trả về kiểu file binary
+    });
+  }
+   
 }
