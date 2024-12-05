@@ -23,6 +23,7 @@
       <div nz-col nzSpan="4"></div>
       <div nz-col nzSpan="14" class="d-flex justify-content-end">
         <app-button-base
+          *ngIf="userRole == 'Leader'"
           titleTooltip="Phân công"
           iconClass="fa-solid fa-chalkboard-user"
           tooltipPlacement="topRight"

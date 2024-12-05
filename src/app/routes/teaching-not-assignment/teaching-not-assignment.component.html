@@ -65,7 +65,6 @@
           <th class="text-center" nzWidth="10%">Nhóm ngành</th>
           <th class="text-center" nzWidth="auto">Lịch học</th>
           <th class="text-left" nzWidth="5%">GD</th>
-          <th class="text-center" nzWidth="10%">Hành động</th>
         </tr>
       </thead>
       <tbody>
@@ -77,25 +76,6 @@
           <td class="text-center">{{ data?.groupName }}</td>
           <td>{{ data?.timeTable }}</td>
           <td>{{ data?.gdTeaching }}</td>
-          <td>
-            <div class="d-flex justify-content-center">
-              <app-button-base
-                titleTooltip="Sửa"
-                iconClass="fa-solid fa-pen-to-square"
-                tooltipPlacement="topRight"
-                [isShowTooltip]="true"
-              >
-              </app-button-base>
-              <app-button-base
-                titleTooltip="Xóa"
-                [danger]="true"
-                iconClass="far fa-trash-alt"
-                tooltipPlacement="topRight"
-                [isShowTooltip]="true"
-              >
-              </app-button-base>
-            </div>
-          </td>
         </tr>
       </tbody>
     </nz-table>

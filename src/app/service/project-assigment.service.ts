@@ -10,36 +10,39 @@ export class ProjectAssigmentService {
   constructor(private httpClient: HttpClient) {
     this.url = 'https://localhost:7286/api/project-assignment';
   }
-  token = localStorage.getItem('access_token');  
-
-  getAllProjectAssignment(page: number, size: number, queryString: string,): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);  
-    return this.httpClient.get(this.url + '/assignment' + '?page=' + page + '&size=' + size + '&filter=' +queryString, { headers });
+ 
+  private createHeaders(): HttpHeaders {
+    const token = localStorage.getItem('access_token');
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
-  getProjectAssignmentFilter(payload: any): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);  
-    return this.httpClient.post(this.url + '/filter-assignment', payload, { headers });
+  getProjectAssignmentFilter(payload: any): Observable<any> {  
+    return this.httpClient.post(this.url + '/filter-assignment', payload, {
+      headers: this.createHeaders()
+    });
   }
 
-  getAllProjectNotAssignment(page: number, size: number, queryString: string,): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);  
-    return this.httpClient.get(this.url + '/not-assignment' + '?page=' + page + '&size=' + size + '&filter=' +queryString, { headers });
+  getProjectNotAssignmentFilter(payload: any): Observable<any> {  
+    return this.httpClient.post(this.url + '/filter-not-assignment', payload, {
+      headers: this.createHeaders()
+    });
   }
 
-  getProjectNotAssignmentFilter(payload: any): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);  
-    return this.httpClient.post(this.url + '/filter-not-assignment', payload, { headers });
+  getTeacherNotAssignmentFilter(payload: any): Observable<any> {  
+    return this.httpClient.post(this.url + '/teacher-not-assignment', payload, {
+      headers: this.createHeaders()
+    });
   }
 
   projectAssignment(){
-    return this.httpClient.get('https://localhost:7286/api/assignment/aspirating');
+    return this.httpClient.get('https://localhost:7286/api/assignment/aspirating', {
+      headers: this.createHeaders()
+    });
   }
 
   exportProjectAssignment() {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.httpClient.get(this.url + '/export', {
-      headers,
+      headers: this.createHeaders(),
       responseType: 'blob'  // Đảm bảo API trả về kiểu file binary
     });
   }

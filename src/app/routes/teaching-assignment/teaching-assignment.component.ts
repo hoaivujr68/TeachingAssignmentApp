@@ -11,12 +11,24 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrls: ['./teaching-assignment.component.scss']
 })
 export class TeachingAssignmentComponent extends LecturerManagementComponent {
+  userRole: string = 'Leader';
+
   constructor(
     public lecturerServiceService: LecturerServiceService,
     public teachingAssigmentService: TeachingAssigmentService,
     private message: NzMessageService,
   ) {
     super(lecturerServiceService);
+  }
+
+  async ngOnInit() {
+    super.ngOnInit();
+    this.checkRole();
+  }
+
+  checkRole(){
+    const userRole = localStorage.getItem('listRoles');
+    this.userRole = userRole;
   }
 
   async fetchData() {
@@ -41,6 +53,7 @@ export class TeachingAssignmentComponent extends LecturerManagementComponent {
     .then((res: any) => {
       if (res) {
         this.fetchData();
+        this.message.success("Phân công giảng dạy thành công");
       }
     })
     .finally(() => {

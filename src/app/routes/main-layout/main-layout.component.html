@@ -23,7 +23,7 @@
         <span><a routerLink="lecturer/import-data"></a>THÊM DỮ LIỆU </span>
       </li>
 
-      <li *ngIf="userRole == 'Leader'" nz-submenu nzTitle="QUẢN LÝ DỮ LIỆU" nzIcon="home">
+      <li nz-submenu nzTitle="QUẢN LÝ DỮ LIỆU" nzIcon="home">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="lecturer/lecturer-management">Quản lý giảng viên</a>
@@ -56,11 +56,21 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="KIỂM TRA PHÂN CÔNG" nzIcon="verified">
+      <li nz-submenu *ngIf="userRole == 'Leader'" nzTitle="KIỂM TRA PHÂN CÔNG" nzIcon="verified">
         <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="lecturer/teacher-not-class"
+              >Giảng viên chưa được phân công giảng dạy</a
+            >
+          </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="lecturer/teaching-not-assignment"
               >Lớp chưa được phân công</a
+            >
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="lecturer/teacher-not-aspiration"
+              >Giảng viên chưa được phân công hướng dẫn đồ án</a
             >
           </li>
           <li nz-menu-item nzMatchRouter>

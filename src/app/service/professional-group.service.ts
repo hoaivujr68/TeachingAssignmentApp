@@ -10,15 +10,15 @@ export class ProfessionalGroupService {
   constructor(private httpClient: HttpClient) {
     this.url = 'https://localhost:7286/api/professional-group';
   }
-  token = localStorage.getItem('access_token');  
 
-  getProfessionalGroup(page: number, size: number, queryString: string,): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);  
-    return this.httpClient.get(this.url + '?page=' + page + '&size=' + size + '&filter=' +queryString, { headers });
-  }
+  private createHeaders(): HttpHeaders {
+    const token = localStorage.getItem('access_token');
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  } 
 
   getProfessionalGroupFilter(payload: any): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);  
-    return this.httpClient.post(this.url + '/filter', payload, { headers });
+    return this.httpClient.post(this.url + '/filter', payload, {
+      headers: this.createHeaders()
+    });
   }
 }

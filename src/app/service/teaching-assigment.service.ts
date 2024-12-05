@@ -16,13 +16,6 @@ export class TeachingAssigmentService {
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
-  // Get tất cả các teaching assignments
-  getAllTeachingAssignment(page: number, size: number, queryString: string): Observable<any> {
-    return this.httpClient.get(`${this.url}/assignment?page=${page}&size=${size}&filter=${queryString}`, {
-      headers: this.createHeaders()
-    });
-  }
-
   // Filter teaching assignments
   getTeachingAssignmentFilter(payload: any): Observable<any> {
     return this.httpClient.post(`${this.url}/filter-assignment`, payload, {
@@ -30,16 +23,15 @@ export class TeachingAssigmentService {
     });
   }
 
-  // Get tất cả các teaching assignments chưa được phân công
-  getAllTeachingNotAssignment(page: number, size: number, queryString: string): Observable<any> {
-    return this.httpClient.get(`${this.url}/not-assignment?page=${page}&size=${size}&filter=${queryString}`, {
+  // Filter teaching assignments chưa được phân công
+  getTeachingNotAssignmentFilter(payload: any): Observable<any> {
+    return this.httpClient.post(`${this.url}/filter-not-assignment`, payload, {
       headers: this.createHeaders()
     });
   }
 
-  // Filter teaching assignments chưa được phân công
-  getTeachingNotAssignmentFilter(payload: any): Observable<any> {
-    return this.httpClient.post(`${this.url}/filter-not-assignment`, payload, {
+  getTeacherNotAssignmentFilter(payload: any): Observable<any> {
+    return this.httpClient.post(`${this.url}/teacher-not-assignment`, payload, {
       headers: this.createHeaders()
     });
   }

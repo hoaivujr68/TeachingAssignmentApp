@@ -19,6 +19,8 @@ import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { BlankLayoutComponent } from './blank-layout/blank-layout.component';
+import { TeacherNotClassComponent } from './teacher-not-class/teacher-not-class.component';
+import { TeacherNotAspirationComponent } from './teacher-not-aspiration/teacher-not-aspiration.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { BlankLayoutComponent } from './blank-layout/blank-layout.component';
     UserRegisterComponent,
     UserLoginComponent,
     MainLayoutComponent,
-    BlankLayoutComponent
+    BlankLayoutComponent,
+    TeacherNotClassComponent,
+    TeacherNotAspirationComponent
   ],
   imports: [
     CommonModule,

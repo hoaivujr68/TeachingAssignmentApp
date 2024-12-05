@@ -10,23 +10,24 @@ export class AspirationService {
   constructor(private httpClient: HttpClient) {
     this.url = 'https://localhost:7286/api/aspiration';
   }
-  token = localStorage.getItem('access_token');  
-
-  getAllAspiration(page: number, size: number, queryString: string,): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);  
-    return this.httpClient.get(this.url + '?page=' + page + '&size=' + size + '&filter=' +queryString, { headers });
+ 
+  private createHeaders(): HttpHeaders {
+    const token = localStorage.getItem('access_token');
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
-  getAspirationFilter(payload: any): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);  
-    return this.httpClient.post(this.url + '/filter', payload, { headers });
+  getAspirationFilter(payload: any): Observable<any> { 
+    return this.httpClient.post(this.url + '/filter', payload, {
+      headers: this.createHeaders()
+    });
   }
 
-  importFile(file: File): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);  
+  importFile(file: File): Observable<any> { 
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.httpClient.post(this.url + '/import', formData, { headers });
+    return this.httpClient.post(this.url + '/import', formData, {
+      headers: this.createHeaders()
+    });
   }
 }

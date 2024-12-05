@@ -11,6 +11,8 @@ import { ProjectAsignmentComponent } from './project-asignment/project-asignment
 import { TeachingNotAssignmentComponent } from './teaching-not-assignment/teaching-not-assignment.component';
 import { AspirationNotAssignmentComponent } from './aspiration-not-assignment/aspiration-not-assignment.component';
 import { AspirationManagementComponent } from './aspiration-management/aspiration-management.component';
+import { TeacherNotAspirationComponent } from './teacher-not-aspiration/teacher-not-aspiration.component';
+import { TeacherNotClassComponent } from './teacher-not-class/teacher-not-class.component';
 
 const routes: Routes = [
   { path: 'lecturer-management', component: LecturerManagementComponent },
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'teaching-not-assignment', component: TeachingNotAssignmentComponent },
   { path: 'project-not-assignment', component: AspirationNotAssignmentComponent },
   { path: 'aspiration-management', component: AspirationManagementComponent },
+  { path: 'teacher-not-aspiration', component: TeacherNotAspirationComponent },
+  { path: 'teacher-not-class', component: TeacherNotClassComponent },
 
 ];
 

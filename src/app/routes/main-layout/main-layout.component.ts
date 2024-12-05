@@ -21,7 +21,8 @@ export class MainLayoutComponent {
     // Xóa token, hoặc làm các bước đăng xuất khác
     console.log('Đăng xuất');
     localStorage.removeItem('access_token');
-    // Điều hướng về trang đăng nhập
+    localStorage.removeItem('userName');
+    localStorage.removeItem('listRoles');
     this.router.navigate(['/login']);
   }
 

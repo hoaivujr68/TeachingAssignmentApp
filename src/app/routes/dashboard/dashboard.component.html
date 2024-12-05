@@ -1,53 +1,88 @@
 <div style="height: 90vh; overflow: auto; padding: 8px">
-  <div nz-row nzGutter="16" style="padding-bottom: 8px;">
+  <div nz-row nzGutter="16" style="padding-bottom: 8px">
     <div nz-col nzSpan="24">
       <div class="header-container">
         <h3>Trang chủ Quản lý phân công</h3>
-        <div style="padding-right: 10px; padding-top: 4px;">
+        <div style="padding-right: 10px; padding-top: 4px">
           <app-button-base
             text=""
             titleTooltip="Tải lại"
             iconClass="fa-solid fa-arrow-rotate-right"
             buttonClass="m-0"
             [isShowTooltip]="true"
+            (onClick)="handleReload($event)"
           ></app-button-base>
-        </div>     
+        </div>
       </div>
     </div>
   </div>
-  <div nz-row nzGutter="16">
-    <div *ngFor="let item of leftSideData" nz-col nzSpan="6" style="padding-bottom: 8px;">
-      <nz-card style="height: 16vh;">
-        <div style="height: 3vh" class="text-center">
-          {{ item?.label }}
-        </div>
-        <div style="height: 5vh" class="text-center font-sz30">
-          <strong>{{ item?.numeric }}</strong>
-        </div>
-        <div style="height: 8vh">
-          <nz-divider style="margin-top: 16px; margin-bottom: 12px"></nz-divider>
-          <strong style="position: absolute; bottom: 0.8vh; color: #286090" class="color-base text-left cursor-pointer" (click)="handleClick(item)">Xem chi tiết</strong>
-        </div>
-      </nz-card>
+  <ng-container *ngIf="userRole == 'Leader'; else teacherTpl">
+    <div nz-row nzGutter="16">
+      <div
+        *ngFor="let item of leftSideData"
+        nz-col
+        nzSpan="6"
+        style="padding-bottom: 8px"
+      >
+        <nz-card style="height: 16vh">
+          <div style="height: 3vh" class="text-center">
+            {{ item?.label }}
+          </div>
+          <div style="height: 5vh" class="text-center font-sz30">
+            <strong>{{ item?.value }}</strong>
+          </div>
+          <div style="height: 8vh">
+            <nz-divider
+              style="margin-top: 16px; margin-bottom: 12px"
+            ></nz-divider>
+            <strong
+              style="position: absolute; bottom: 0.8vh; color: #286090"
+              class="color-base text-left cursor-pointer"
+              (click)="handleClick(item)"
+              >Xem chi tiết</strong
+            >
+          </div>
+        </nz-card>
+      </div>
     </div>
-  </div>
-  <div nz-row nzGutter="16">
-    <div nz-col nzSpan="12">
-      <nz-card style="height: 45vh;">
-        <canvas id="myChart1"></canvas>
-      </nz-card>
+    <div nz-row nzGutter="16">
+      <div nz-col nzSpan="12">
+        <nz-card style="height: 45vh">
+          <canvas id="myChartLeader1"></canvas>
+        </nz-card>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-card style="height: 45vh">
+          <canvas id="myChartLeader2"></canvas>
+        </nz-card>
+      </div>
     </div>
-    <div nz-col nzSpan="12">
-      <nz-card style="height: 45vh;">
-        <canvas id="myChart2"></canvas>
-      </nz-card>
+  </ng-container>
+  <ng-template #teacherTpl>
+    <div nz-row nzGutter="16">
+      <div nz-col nzSpan="12">
+        <nz-card style="height: 45vh">
+          <canvas id="myChartGV1"></canvas>
+        </nz-card>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-card style="height: 45vh">
+          <canvas id="myChartGV2"></canvas>
+        </nz-card>
+      </div>
     </div>
-  </div>
-  <!-- <div nz-row nzGutter="16">
-    <div nz-col nzSpan="24">
-      <nz-card style="height: 45vh;">
-        <canvas id="myChart3"></canvas>
-      </nz-card>
+    <div style="padding-top: 12px;" nz-row nzGutter="16">
+      <div nz-col nzSpan="12">
+        <nz-card style="height: 45vh">
+          <canvas id="myChartGV4"></canvas>
+        </nz-card>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-card style="height: 45vh">
+          <canvas id="myChartGV3"></canvas>
+        </nz-card>
+      </div>
     </div>
-  </div> -->
+  </ng-template>
 </div>
+
