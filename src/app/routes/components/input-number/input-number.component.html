@@ -1,0 +1,55 @@
+<nz-form-item>
+      <ng-container *ngIf="!hideLabel && !isFloatingInput">
+        <app-label-vertical nz-col nzSpan="24" [content]="labelContent" [required]="required"></app-label-vertical>
+      </ng-container>
+      <nz-form-control
+        [nzSpan]="!hideLabel ? (labelHorizontal ? span : 24) : null"
+        [ngClass]="[classInput]"
+      >
+        <ng-container *ngIf="isFloatingInput">
+          <nz-input-group appFloatingInputGroup [nzAddOnAfter]="isAddOn ? addOn : ''">
+            <label>{{ labelContent }}<span *ngIf="required" class="text-red"> (*)</span></label>
+            <nz-input-number
+              nz-input
+              #floatingInput
+              type="number"
+              [nzDisabled]="disabled"
+              class="w-100"
+              onkeydown="return event.keyCode !== 45 && event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 231"
+              [formControl]="ngControl.control"
+              [nzMin]="min"
+              [nzMax]="max"
+              [nzStep]="step"
+              [nzPlaceHolder]="placeHolder"
+              (keyup.enter)="handleChange()"
+              (focusout)="handleChange()"
+              [nzPlaceHolder]="placeholder"
+            >
+            </nz-input-number>
+          </nz-input-group>
+        </ng-container>
+        <ng-container *ngIf="!isFloatingInput">
+          <nz-input-group [nzAddOnAfter]="isAddOn ? addOn : ''">
+            <nz-input-number
+              #input
+              [nzDisabled]="disabled"
+              class="w-100"
+              onkeydown="return event.keyCode !== 45 && event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 231"
+              [formControl]="ngControl.control"
+              [nzMin]="min"
+              [nzMax]="max"
+              [nzStep]="step"
+              [nzPlaceHolder]="placeHolder"
+              (keyup.enter)="handleChange()"
+              (focusout)="handleChange()"
+            >
+            </nz-input-number>
+          </nz-input-group>
+        </ng-container>
+      </nz-form-control>
+    </nz-form-item>
+    
+    <ng-template #addOn>
+      <span class="ml-2 mr-2">{{ addOnText }}</span>
+    </ng-template>
+    

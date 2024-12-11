@@ -1,0 +1,138 @@
+<nz-form-item>
+  <ng-container *ngIf="!hideLabel && !isFloatingInput">
+    <app-label-vertical
+      nz-col
+      [nzSpan]="24"
+      [content]="labelContent"
+      [classLabel]="classLabel"
+      [required]="required"
+    >
+    </app-label-vertical>
+  </ng-container>
+  <nz-form-control
+    [ngClass]="{ separate: classInput }"
+    [nzSpan]="hideLabel ? null : labelHorizontal ? span : null"
+  >
+    <div
+      *ngIf="isShowTooltip"
+      nz-tooltip
+      style="display: inline-block"
+      class="w-100"
+    >
+      <ng-container *ngIf="!isFloatingInput">
+        <nz-input-group
+          [nzAddOnBefore]="isAddOnBefore && addOnBefore ? addOnBefore : ''"
+          [nzAddOnAfter]="isAddOnAfter && addOnAfter ? addOnAfter : ''"
+        >
+          <input
+            #input
+            value=""
+            [attr.disabled]="disabled ? '' : null"
+            [attr.readonly]="readonly ? '' : null"
+            [formControl]="ngControl.control"
+            [type]="type"
+            nz-input
+            placeholder="{{ placeHolder }}"
+            (keyup.enter)="handleKeyUpEnter()"
+            (focusout)="handleChange()"
+            (keypress)="preventNegative($event)"
+            (blur)="handleBlur(input.value)"
+          />
+        </nz-input-group>
+      </ng-container>
+      <ng-container *ngIf="isFloatingInput">
+        <nz-input-group
+          appFloatingInputGroup
+          [nzAddOnBefore]="isAddOnBefore && addOnBefore ? addOnBefore : ''"
+          [nzAddOnAfter]="isAddOnAfter && addOnAfter ? addOnAfter : ''"
+        >
+          <label [ngClass]="classLabel"
+            >{{ labelContent
+            }}<span *ngIf="required" class="text-red"> (*)</span></label
+          >
+          <input
+            #floatingInput
+            *ngIf="!isShowTooltip && !textRight"
+            [attr.disabled]="disabled ? '' : null"
+            [attr.readonly]="readonly ? '' : null"
+            [formControl]="ngControl.control"
+            [type]="type"
+            nz-input
+            placeholder="{{ placeHolder }}"
+            (keyup.enter)="handleKeyUpEnter()"
+            (focusout)="handleChange()"
+            (keypress)="preventNegative($event)"
+            (blur)="handleBlur(floatingInput.value)"
+          />
+        </nz-input-group>
+      </ng-container>
+    </div>
+    <ng-container *ngIf="isFloatingInput">
+      <nz-input-group
+        appFloatingInputGroup
+        [nzAddOnBefore]="isAddOnBefore && addOnBefore ? addOnBefore : ''"
+        [nzAddOnAfter]="isAddOnAfter && addOnAfter ? addOnAfter : ''"
+      >
+        <label [ngClass]="classLabel"
+          >{{ labelContent
+          }}<span *ngIf="required" class="text-red"> (*)</span></label
+        >
+        <input
+          #floatingInput
+          *ngIf="!isShowTooltip && !textRight"
+          [attr.disabled]="disabled ? '' : null"
+          [attr.readonly]="readonly ? '' : null"
+          [formControl]="ngControl.control"
+          [type]="type"
+          nz-input
+          placeholder="{{ placeHolder }}"
+          (keyup.enter)="handleKeyUpEnter()"
+          (focusout)="handleChange()"
+          (keypress)="preventNegative($event)"
+          (blur)="handleBlur(floatingInput.value)"
+        />
+      </nz-input-group>
+    </ng-container>
+    <ng-container *ngIf="!isFloatingInput">
+      <nz-input-group
+        *ngIf="!isShowTooltip && !textRight"
+        [nzAddOnBefore]="isAddOnBefore && addOnBefore ? addOnBefore : ''"
+        [nzAddOnAfter]="isAddOnAfter && addOnAfter ? addOnAfter : ''"
+      >
+        <input
+          #input
+          [attr.disabled]="disabled ? '' : null"
+          [attr.readonly]="readonly ? '' : null"
+          [formControl]="ngControl.control"
+          [type]="type"
+          nz-input
+          placeholder="{{ placeHolder }}"
+          (keyup.enter)="handleKeyUpEnter()"
+          (focusout)="handleChange()"
+          (keypress)="preventNegative($event)"
+          (blur)="handleBlur(input.value)"
+        />
+      </nz-input-group>
+      <nz-input-group
+        *ngIf="typeNumber && textRight"
+        [nzAddOnBefore]="isAddOnBefore && addOnBefore ? addOnBefore : ''"
+        [nzAddOnAfter]="isAddOnAfter && addOnAfter ? addOnAfter : ''"
+      >
+        <input
+          #input
+          class="text-right w-100"
+          [attr.disabled]="disabled ? '' : null"
+          [attr.readonly]="readonly ? '' : null"
+          [formControl]="ngControl.control"
+          [type]="type"
+          nz-input
+          placeholder="{{ placeHolder }}"
+          (keyup.enter)="handleKeyUpEnter()"
+          (focusout)="handleChange()"
+          (keypress)="preventNegative($event)"
+          (blur)="handleBlur(input.value)"
+        />
+      </nz-input-group>
+    </ng-container>
+  </nz-form-control>
+</nz-form-item>

@@ -1,72 +1,28 @@
 <ng-container *ngIf="isShowBtn">
-      <ng-container *ngIf="!popConfirm; else buttonWithPopConfirm">
-        <button
-          nz-button
-          nz-tooltip
-          nzTooltipTitle="{{ titleTooltip }}"
-          type="button"
-          [ngClass]="[buttonClass]"
-          [nzSize]="size"
-          [nzDanger]="danger"
-          [nzType]="buttonType"
-          [nzShape]="buttonShape"
-          [disabled]="disabled"
-          [nzLoading]="loading"
-          [nzTooltipTrigger]="isShowTooltip ? 'hover' : null"
-          [nzTooltipPlacement]="tooltipPlacement"
-          (click)="handleClick()"
-        >
-          <ng-container *ngIf="iconPosition === 'left'">
-            <ng-container [ngSwitch]="iconSource" *ngIf="iconClass">
-              <ng-container *ngSwitchCase="'ant'">
-                <i
-                  *ngIf="iconType"
-                  nz-icon
-                  [ngClass]="iconClass"
-                  [nzType]="iconType"
-                  [nzTheme]="iconTheme"
-                  [nzIconfont]="iconFont"
-                  [nzSpin]="iconSpin"
-                ></i>
-              </ng-container>
-              <ng-container *ngSwitchCase="'fontAwesome'">
-                  <i [ngClass]="[loading ? '' : iconClass, 'mr-1']"></i>
-                </ng-container>                
-            </ng-container>
-          </ng-container>
-        </button>
-      </ng-container>
-    
-      <ng-template #buttonWithPopConfirm>
-        <button
-          nz-button
-          nz-popconfirm
-          nz-tooltip
-          nzTooltipTitle="{{ titleTooltip }}"
-          type="button"
-          [nzSize]="size"
-          [nzDanger]="danger"
-          [nzLoading]="loading"
-          [nzShape]="buttonShape"
-          [nzType]="buttonType"
-          [ngClass]="[buttonClass]"
-          [disabled]="disabled"
-          [nzPopconfirmPlacement]="popconfirmPlacement"
-          [nzTooltipTrigger]="isShowTooltip ? 'hover' : null"
-          [nzTooltipPlacement]="tooltipPlacement"
-          (nzOnConfirm)="handleClick()"
-        >
-          <ng-container *ngTemplateOutlet="content"></ng-container>
-        </button>
-      </ng-template>
-    
-      <ng-template #content>
+  <ng-container *ngIf="!popConfirm; else buttonWithPopConfirm">
+    <button
+      nz-button
+      nz-tooltip
+      nzTooltipTitle="{{ titleTooltip }}"
+      type="button"
+      [ngClass]="[buttonClass]"
+      [nzSize]="size"
+      [nzDanger]="danger"
+      [nzType]="buttonType"
+      [nzShape]="buttonShape"
+      [disabled]="disabled"
+      [nzLoading]="loading"
+      [nzTooltipTrigger]="isShowTooltip ? 'hover' : null"
+      [nzTooltipPlacement]="tooltipPlacement"
+      (click)="handleClick()"
+    >
+      <ng-container *ngIf="iconPosition === 'left'">
         <ng-container [ngSwitch]="iconSource" *ngIf="iconClass">
           <ng-container *ngSwitchCase="'ant'">
             <i
               *ngIf="iconType"
-              [ngClass]="iconClass"
               nz-icon
+              [ngClass]="iconClass"
               [nzType]="iconType"
               [nzTheme]="iconTheme"
               [nzIconfont]="iconFont"
@@ -75,8 +31,54 @@
           </ng-container>
           <ng-container *ngSwitchCase="'fontAwesome'">
             <i [ngClass]="[loading ? '' : iconClass, 'mr-1']"></i>
-          </ng-container>          
+          </ng-container>
         </ng-container>
-      </ng-template>
+      </ng-container>
+      <ng-container *ngIf="text">
+        {{ text }}
+      </ng-container>
+    </button>
+  </ng-container>
+
+  <ng-template #buttonWithPopConfirm>
+    <button
+      nz-button
+      nz-popconfirm
+      nz-tooltip
+      nzTooltipTitle="{{ titleTooltip }}"
+      type="button"
+      [nzSize]="size"
+      [nzDanger]="danger"
+      [nzLoading]="loading"
+      [nzShape]="buttonShape"
+      [nzType]="buttonType"
+      [ngClass]="[buttonClass]"
+      [disabled]="disabled"
+      [nzPopconfirmPlacement]="popconfirmPlacement"
+      [nzTooltipTrigger]="isShowTooltip ? 'hover' : null"
+      [nzTooltipPlacement]="tooltipPlacement"
+      (nzOnConfirm)="handleClick()"
+    >
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </button>
+  </ng-template>
+
+  <ng-template #content>
+    <ng-container [ngSwitch]="iconSource" *ngIf="iconClass">
+      <ng-container *ngSwitchCase="'ant'">
+        <i
+          *ngIf="iconType"
+          [ngClass]="iconClass"
+          nz-icon
+          [nzType]="iconType"
+          [nzTheme]="iconTheme"
+          [nzIconfont]="iconFont"
+          [nzSpin]="iconSpin"
+        ></i>
+      </ng-container>
+      <ng-container *ngSwitchCase="'fontAwesome'">
+        <i [ngClass]="[loading ? '' : iconClass, 'mr-1']"></i>
+      </ng-container>
     </ng-container>
-    
+  </ng-template>
+</ng-container>

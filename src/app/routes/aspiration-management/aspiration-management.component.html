@@ -23,13 +23,6 @@
       <div nz-col nzSpan="4"></div>
       <div nz-col nzSpan="14" class="d-flex justify-content-end">
         <app-button-base
-          titleTooltip="Thêm nguyện vọng"
-          iconClass="fa-solid fa-user-plus"
-          tooltipPlacement="topRight"
-          [isShowTooltip]="true"
-        >
-        </app-button-base>
-        <app-button-base
           iconClass="fa-solid fa-rotate-right"
           titleTooltip="Tải lại"
           [isShowTooltip]="true"
@@ -53,45 +46,25 @@
       <thead>
         <tr>
           <th nzWidth="7%">Mã lớp</th>
-          <th class="text-left" nzWidth="8%">Mã sinh viên</th>
-          <th class="text-left" nzWidth="10%">Tên sinh viên</th>
+          <th nzWidth="8%">Mã sinh viên</th>
+          <th nzWidth="10%">Tên sinh viên</th>
           <th class="text-center" nzWidth="auto">Đề tài</th>
-          <th class="text-left" nzWidth="11%">Nguyện vọng 1</th>
-          <th class="text-center" nzWidth="11%">Nguyện vọng 2</th>
-          <th class="text-center" nzWidth="11%">Nguyện vọng 3</th>
-          <th class="text-left" nzWidth="10%">Nguyện vọng chấp nhận</th>
-          <th class="text-center" nzWidth="9%">Hành động</th>
+          <th nzWidth="13%">Nguyện vọng 1</th>
+          <th nzWidth="13%">Nguyện vọng 2</th>
+          <th nzWidth="13%">Nguyện vọng 3</th>
+          <th nzWidth="13%">Nguyện vọng chấp nhận</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
           <td>{{ data?.className }}</td>
           <td>{{ data?.studentId }}</td>
-          <td class="text-center">{{ data?.studentName }}</td>
-          <td class="text-center">{{ data?.topic }}</td>
-          <td class="text-center">{{ data?.aspiration1 }}</td>
+          <td>{{ data?.studentName }}</td>
+          <td>{{ data?.topic }}</td>
+          <td>{{ data?.aspiration1 }}</td>
           <td>{{ data?.aspiration2 }}</td>
           <td>{{ data?.aspiration3 }}</td>
           <td>{{ data?.desireAccept }}</td>
-          <td>
-            <div class="d-flex justify-content-center">
-              <app-button-base
-                titleTooltip="Sửa"
-                iconClass="fa-solid fa-pen-to-square"
-                tooltipPlacement="topRight"
-                [isShowTooltip]="true"
-              >
-              </app-button-base>
-              <app-button-base
-                titleTooltip="Xóa"
-                [danger]="true"
-                iconClass="far fa-trash-alt"
-                tooltipPlacement="topRight"
-                [isShowTooltip]="true"
-              >
-              </app-button-base>
-            </div>
-          </td>
         </tr>
       </tbody>
     </nz-table>

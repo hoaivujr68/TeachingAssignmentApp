@@ -37,13 +37,6 @@
       </div>
       <div nz-col nzSpan="14" class="d-flex justify-content-end">
         <app-button-base
-          titleTooltip="Thêm giảng viên"
-          iconClass="fa-solid fa-user-plus"
-          tooltipPlacement="topRight"
-          [isShowTooltip]="true"
-        >
-        </app-button-base>
-        <app-button-base
           iconClass="fa-solid fa-rotate-right"
           titleTooltip="Tải lại"
           [isShowTooltip]="true"
@@ -76,7 +69,6 @@
           </th>
           <th class="text-center" nzWidth="12%">GD giảng dạy</th>
           <th class="text-center" nzWidth="14%">GD hướng dẫn đồ án</th>
-          <th class="text-center" nzWidth="10%">Hành động</th>
         </tr>
       </thead>
       <tbody>
@@ -113,7 +105,7 @@
           </td>
           <td class="text-center">{{ data?.gdTeaching }}</td>
           <td class="text-center">{{ data?.gdInstruct }}</td>
-          <td>
+          <!-- <td>
             <div class="d-flex justify-content-center">
               <app-button-base
                 titleTooltip="Sửa"
@@ -131,7 +123,7 @@
               >
               </app-button-base>
             </div>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </nz-table>

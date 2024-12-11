@@ -13,6 +13,9 @@ import { AspirationNotAssignmentComponent } from './aspiration-not-assignment/as
 import { AspirationManagementComponent } from './aspiration-management/aspiration-management.component';
 import { TeacherNotAspirationComponent } from './teacher-not-aspiration/teacher-not-aspiration.component';
 import { TeacherNotClassComponent } from './teacher-not-class/teacher-not-class.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { ListCriteriaComponent } from './list-criteria/list-criteria.component';
+import { CheckTeachingAssignmentsComponent } from './check-teaching-assignments/check-teaching-assignments.component';
 
 const routes: Routes = [
   { path: 'lecturer-management', component: LecturerManagementComponent },
@@ -27,6 +30,9 @@ const routes: Routes = [
   { path: 'aspiration-management', component: AspirationManagementComponent },
   { path: 'teacher-not-aspiration', component: TeacherNotAspirationComponent },
   { path: 'teacher-not-class', component: TeacherNotClassComponent },
+  { path: 'feedback-management', component: FeedbackComponent },
+  { path: 'check-assignment', component: ListCriteriaComponent },
+  { path: 'list-criteria', component: CheckTeachingAssignmentsComponent },
 
 ];
 

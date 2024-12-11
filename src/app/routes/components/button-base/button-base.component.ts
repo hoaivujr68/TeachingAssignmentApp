@@ -18,6 +18,7 @@ import {
 })
 export class ButtonBaseComponent implements OnInit, AfterViewInit {
   @Input() rights: string[] = [];
+  @Input() text = '';
   @Input() buttonType = 'primary';
   @Input() size = 'default';
   @Input() danger: boolean = false;

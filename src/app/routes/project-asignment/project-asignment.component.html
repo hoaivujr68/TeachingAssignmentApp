@@ -23,19 +23,22 @@
       <div nz-col nzSpan="4"></div>
       <div nz-col nzSpan="14" class="d-flex justify-content-end">
         <app-button-base
-          *ngIf="userRole == 'Leader'"
-          titleTooltip="Phân công"
+          *ngIf="userRole == 'lanhdao'"
+          text="Phân công"
           iconClass="fa-solid fa-chalkboard-user"
-          tooltipPlacement="topRight"
-          [isShowTooltip]="true"
           (onClick)="hanleClick($event)"
         >
         </app-button-base>
         <app-button-base
           iconClass="fas fa-download"
-          titleTooltip="Xuất Excel"
-          [isShowTooltip]="true"
+          text="Xuất Excel giảng viên"
           (onClick)="handleExportData()"
+        >
+        </app-button-base>
+        <app-button-base
+          iconClass="fas fa-download"
+          text="Xuất Excel nguyện vọng"
+          (onClick)="handleExportDataAspiration()"
         >
         </app-button-base>
         <app-button-base
@@ -61,8 +64,7 @@
     >
       <thead>
         <tr>
-          <th nzWidth="12%">Mã Giảng viên</th>
-          <th class="text-left" nzWidth="12%">Tên giảng viên</th>
+          <th nzWidth="15%">Giảng viên</th>
           <th class="text-left" nzWidth="10%">Mã sinh viên</th>
           <th class="text-center" nzWidth="12%">Tên sinh viên</th>
           <th class="text-left" nzWidth="auto">Đề tài</th>
@@ -72,8 +74,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
-          <td>{{ data?.teacherCode }}</td>
-          <td>{{ data?.teacherName }}</td>
+          <td>{{ data?.teacherCode }} - {{ data?.teacherName }}</td>
           <td>{{ data?.studentId }}</td>
           <td class="text-center">{{ data?.studentName }}</td>
           <td>{{ data?.topic }}</td>
@@ -85,14 +86,7 @@
                 iconClass="fa-solid fa-pen-to-square"
                 tooltipPlacement="topRight"
                 [isShowTooltip]="true"
-              >
-              </app-button-base>
-              <app-button-base
-                titleTooltip="Xóa"
-                [danger]="true"
-                iconClass="far fa-trash-alt"
-                tooltipPlacement="topRight"
-                [isShowTooltip]="true"
+                (onClick)="handleOpen(data)"
               >
               </app-button-base>
             </div>
@@ -101,6 +95,109 @@
       </tbody>
     </nz-table>
   </div>
+
+  <nz-modal
+    [(nzVisible)]="isModalVisible"
+    nzTitle="Thay đổi phân công cho sinh viên {{ titleModal }}"
+    (nzOnCancel)="handleCancel()"
+    (nzOnOk)="submitModel()"
+    [nzFooter]="modalFooter"
+    [nzWidth]="'600px'"
+  >
+    <form nz-form [formGroup]="form" (ngSubmit)="submitModel()">
+      <div nz-row nzGutter="16">
+        <div nz-col nzSpan="12">
+          <app-input-text
+            labelContent="Tên sinh viên"
+            formControlName="studentName"
+          ></app-input-text>
+        </div>
+        <div nz-col nzSpan="6">
+          <app-input-number
+            labelContent="GD lớp đồ án"
+            formControlName="gdInstruct"
+          ></app-input-number>
+        </div>
+        <div nz-col nzSpan="6">
+          <app-input-number
+            labelContent="Tỷ lệ trung bình"
+            formControlName="rangeInstruct"
+          ></app-input-number>
+        </div>
+      </div>
+      <div nz-row nzGutter="16">
+        <div nz-col nzSpan="12">
+          <app-input-text
+            labelContent="Giảng viên hiện tại"
+            formControlName="currentTeacher"
+          ></app-input-text>
+        </div>
+        <div nz-col nzSpan="6">
+          <app-input-number
+            labelContent="GD đã phân"
+            formControlName="currentAssignment"
+          ></app-input-number>
+        </div>
+        <div nz-col nzSpan="6">
+          <app-input-number
+            labelContent="Tỷ lệ"
+            formControlName="currentRange"
+          ></app-input-number>
+        </div>
+      </div>
+      <div nz-row nzGutter="16">
+        <div nz-col nzSpan="12">
+          <app-label-vertical
+            style="padding-left: 0px !important"
+            nz-col
+            [nzSpan]="24"
+            [content]="'Giảng viên mới'"
+          >
+          </app-label-vertical>
+          <nz-select
+            class="w-100"
+            nzAllowClear="true"
+            formControlName="teacherCode"
+            (ngModelChange)="onTeacherCodeChange($event)"
+          >
+            <nz-option
+              *ngFor="let item of listOfTeacher"
+              [nzValue]="item.code"
+              [nzLabel]="item.name"
+            >
+            </nz-option>
+          </nz-select>
+        </div>
+        <div nz-col nzSpan="6">
+          <app-input-number
+            labelContent="GD đã phân"
+            formControlName="gdAssignment"
+          ></app-input-number>
+        </div>
+        <div nz-col nzSpan="6">
+          <app-input-number
+            labelContent="Tỷ lệ"
+            formControlName="gdRange"
+          ></app-input-number>
+        </div>
+      </div>
+    </form>
+    <ng-template #modalFooter>
+      <app-button-base
+        buttonClass="mr-2 color-button-default custom-boder"
+        text="Đóng"
+        (onClick)="handleCancel()"
+      >
+      </app-button-base>
+      <app-button-base text="Phân thử" (onClick)="handleTryAssignment()"></app-button-base>
+      <app-button-base
+        buttonClass="mr-2 color-button-green custom-boder"
+        text="Lưu"
+        (onClick)="submitModel()"
+      >
+      </app-button-base>
+    </ng-template>
+  </nz-modal>
 
   <ng-template #footer>
     <app-footer-table

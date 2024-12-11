@@ -1,0 +1,10 @@
+<nz-form-label
+  [nzRequired]="required"
+  [nzNoColon]="noColon"
+  [nzFor]="for"
+  class="p-0"
+  [ngClass]="classLabel"
+>
+  <span>{{ content }}</span>
+  <ng-content></ng-content>
+</nz-form-label>

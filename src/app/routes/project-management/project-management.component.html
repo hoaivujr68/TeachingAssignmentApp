@@ -23,13 +23,6 @@
       <div nz-col nzSpan="4"></div>
       <div nz-col nzSpan="14" class="d-flex justify-content-end">
         <app-button-base
-          titleTooltip="Thêm nhóm chuyên môn"
-          iconClass="fa-solid fa-user-plus"
-          tooltipPlacement="topRight"
-          [isShowTooltip]="true"
-        >
-        </app-button-base>
-        <app-button-base
           iconClass="fa-solid fa-rotate-right"
           titleTooltip="Tải lại"
           [isShowTooltip]="true"
@@ -59,7 +52,6 @@
           <th class="text-left" nzWidth="12%">Mã sinh viên</th>
           <th class="text-left" nzWidth="15%">Tên sinh viên</th>
           <th class="text-left" nzWidth="8%">GD</th>
-          <th class="text-center" nzWidth="10%">Hành động</th>
         </tr>
       </thead>
       <tbody>
@@ -71,25 +63,6 @@
           <td>{{ data?.studenId }}</td>
           <td>{{ data?.studentName }}</td>
           <td>{{ data?.gdInstruct }}</td>
-          <td>
-            <div class="d-flex justify-content-center">
-              <app-button-base
-                titleTooltip="Sửa"
-                iconClass="fa-solid fa-pen-to-square"
-                tooltipPlacement="topRight"
-                [isShowTooltip]="true"
-              >
-              </app-button-base>
-              <app-button-base
-                titleTooltip="Xóa"
-                [danger]="true"
-                iconClass="far fa-trash-alt"
-                tooltipPlacement="topRight"
-                [isShowTooltip]="true"
-              >
-              </app-button-base>
-            </div>
-          </td>
         </tr>
       </tbody>
     </nz-table>

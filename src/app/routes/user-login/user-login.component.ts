@@ -34,7 +34,8 @@ export class UserLoginComponent {
         localStorage.setItem('userName', res.data.username);
         localStorage.setItem('listRoles', res.data.roles);
         this.message.success("Đăng nhập thành công");
-        this.router.navigate(['/dashboard']);
+        if (res.data.roles == 'admin') this.router.navigate(['/lecturer/import-data']);
+        else this.router.navigate(['/dashboard']);
       }
     })
     .catch((error) => {

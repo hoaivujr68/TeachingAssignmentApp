@@ -14,6 +14,7 @@ interface Teacher {
 })
 export class LecturerManagementComponent {
   isLoadingTable: boolean = false;
+  userRole: string = 'lanhdao';
   mode: string = 'specialty';
   total = 0;
   scrollY: string = 'calc(100vh - 240px)';
@@ -41,6 +42,12 @@ export class LecturerManagementComponent {
 
   async ngOnInit() {
     await this.fetchData();
+    this.checkRole();
+  }
+
+  checkRole(){
+    const userRole = localStorage.getItem('listRoles');
+    this.userRole = userRole;
   }
 
   buildQueryString() {

@@ -1,0 +1,68 @@
+<div style="height: 90vh">
+  <div class="breadcrumb-container">
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>
+        <a>Kiểm tra phân công</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item> Kiểm tra phân công </nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </div>
+  <nz-divider></nz-divider>
+  <div class="filter-container">
+    <div nz-row nzGutter="16">
+      <div nz-col nzSpan="8">
+        <nz-select
+          class="w-100"
+          nzMode="tags"
+          [nzMaxTagCount]="1"
+          nzPlaceHolder="Chọn tiêu chí kiểm tra"
+          [(ngModel)]="selectedCriteria"
+        >
+          <nz-option
+            *ngFor="let criteria of criteriaList"
+            [nzValue]="criteria.value"
+            [nzLabel]="criteria.label"
+          ></nz-option>
+        </nz-select>
+      </div>
+      <div nz-col nzSpan="4">
+        <app-button-base
+          iconClass="fa-solid fa-magnifying-glass-chart"
+          text="Kiểm tra phân công"
+          (onClick)="performCheck()"
+        >
+        </app-button-base>
+      </div>
+      <div nz-col nzSpan="12" class="d-flex justify-content-end">
+        <app-button-base
+          iconClass="fa-solid fa-rotate-right"
+          titleTooltip="Tải lại"
+          [isShowTooltip]="true"
+          (onClick)="handleReload($event)"
+        >
+        </app-button-base>
+      </div>
+    </div>
+  </div>
+  <div class="table-container pt-2">
+    <nz-table
+      #basicTable
+      [nzData]="listOfData"
+      [nzBordered]="false"
+      [nzFrontPagination]="false"
+      [nzShowPagination]="false"
+      [nzScroll]="{ y: scrollY }"
+      [nzLoading]="isLoadingTable"
+    >
+      <thead>
+        <tr>
+          <th class="text-left" nzWidth="auto">Mã giảng viên</th>
+          <th class="text-left" nzWidth="auto">Tên giảng viên</th>
+          <th class="text-left" nzWidth="auto">Chi tiết lỗi</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

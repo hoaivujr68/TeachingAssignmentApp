@@ -1,0 +1,15 @@
+<nz-tag
+  [nzColor]="colorCode"
+  [ngClass]="tagClass"
+  [nzMode]="mode"
+  (nzOnClose)="handleOnClose($event)"
+  (nzCheckedChange)="handleCheckedChange($event)"
+  [ngStyle]="{
+    'border-radius': hasBorderRadius ? '10px' : null,
+    cursor: isClickable ? 'pointer' : 'default',
+    'min-width': width,
+    'max-width': maxWidth
+  }"
+>
+  <ng-content></ng-content>
+</nz-tag>

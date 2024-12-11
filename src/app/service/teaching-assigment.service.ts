@@ -13,7 +13,7 @@ export class TeachingAssigmentService {
   // Phương thức giúp tạo HttpHeaders với Bearer token
   private createHeaders(): HttpHeaders {
     const token = localStorage.getItem('access_token');
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
   }
 
   // Filter teaching assignments
@@ -36,6 +36,24 @@ export class TeachingAssigmentService {
     });
   }
 
+  updateTeachingAssignment(payload: any): Observable<any> {
+    return this.httpClient.put(`${this.url}`, payload, {
+      headers: this.createHeaders()
+    });
+  }
+
+  getTeacherByClassFilter(payload: any): Observable<any> {
+    return this.httpClient.post(`${this.url}/teacher-by-class`, payload, {
+      headers: this.createHeaders()
+    });
+  }
+
+  getTotalGdByTeacherCode(payload: any): Observable<any> {
+    return this.httpClient.post(`${this.url}/total-gd`, payload, {
+      headers: this.createHeaders()
+    });
+  }
+
   // Phương thức này để lấy các teaching assignments
   teachingAssignment(): Observable<any> {
     return this.httpClient.get('https://localhost:7286/api/assignment/teaching', {
@@ -43,8 +61,21 @@ export class TeachingAssigmentService {
     });
   }
 
+  rangeGdTeaching(): Observable<any> {
+    return this.httpClient.get(`${this.url}/range`, {
+      headers: this.createHeaders()
+    });
+  }
+
   exportTeachingAssignment() {
     return this.httpClient.get(this.url + '/export', {
+      headers: this.createHeaders(),
+      responseType: 'blob' 
+    });
+  }
+
+  exportClassAssignment() {
+    return this.httpClient.get(this.url + '/export-class', {
       headers: this.createHeaders(),
       responseType: 'blob' 
     });

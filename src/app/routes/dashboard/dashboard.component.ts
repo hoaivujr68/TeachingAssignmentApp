@@ -13,7 +13,7 @@ Chart.register(...registerables);
 })
 export class DashboardComponent {
   listDataClassAsignment: any[] = [];
-  userRole: string = 'Leader';
+  userRole: string = 'lanhdao';
   listTotalGd: any[] = [];
   listTotalGdPer: any[] = [];
   listPerGdTeaching: any[] = [];
@@ -47,7 +47,7 @@ export class DashboardComponent {
 
   async ngOnInit(){
     this.checkRole();
-    if (this.userRole == 'Leader'){
+    if (this.userRole == 'lanhdao'){
       await this.fetchDataTotal();
       await this.fetchDataClassAssignment();
       await this.fetchDataAspirationAssignment();
@@ -132,7 +132,7 @@ export class DashboardComponent {
   }
 
   async handleReload(ev: any) {
-    if(this.userRole == 'Leader') {
+    if(this.userRole == 'lanhdao') {
       await this.generalService.refreshETLGeneral()
       .toPromise()
       .then((res: any) => {

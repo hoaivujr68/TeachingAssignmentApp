@@ -1,0 +1,50 @@
+<nz-form-item>
+  <ng-container>
+    <app-label-vertical
+      nz-col
+      [nzSpan]="24"
+      [content]="labelContent"
+      [required]="required"
+    >
+    </app-label-vertical>
+
+  </ng-container>
+  <nz-form-control
+    [nzSpan]="hideLabel ? null : labelHorizontal ? span : null"
+  >
+    <ng-container *ngIf="!isFloatingInput">
+      <!-- <nz-textarea-count> -->
+      <textarea
+        #input
+        class="w-100"
+        nz-input
+        [nzAutosize]="{ minRows: minRows, maxRows: maxRows }"
+        placeholder="{{ placeHolder }}"
+        [attr.disabled]="disabled ? '' : null"
+        [formControl]="ngControl.control"
+        (keyup.enter)="handleKeyUpEnter()"
+        (focusout)="handleChange()"
+        (blur)="handleBlur(input.value)"
+      ></textarea>
+      <!-- </nz-textarea-count> -->
+    </ng-container>
+    <ng-container *ngIf="isFloatingInput">
+      <label>{{ labelContent }}</label>
+      <!-- <nz-textarea-count> -->
+      <textarea
+        #floatingInput
+        class="w-100"
+        appFloatingInputFormControl
+        nz-input
+        [nzAutosize]="{ minRows: minRows, maxRows: maxRows }"
+        placeholder="{{ placeHolder }}"
+        [attr.disabled]="disabled ? '' : null"
+        [formControl]="ngControl.control"
+        (keyup.enter)="handleChange()"
+        (focusout)="handleChange()"
+        (blur)="handleBlur(floatingInput.value)"
+      ></textarea>
+      <!-- </nz-textarea-count> -->
+    </ng-container>
+  </nz-form-control>
+</nz-form-item>

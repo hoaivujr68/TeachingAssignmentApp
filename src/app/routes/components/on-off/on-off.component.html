@@ -1,0 +1,53 @@
+<nz-form-item>
+  <ng-container *ngIf="!hideLabel">
+    <app-label-vertical
+      *ngIf="!labelHorizontal"
+      nz-col
+      [nzSpan]="24"
+      [content]="labelContent"
+      [required]="required"
+    >
+    </app-label-vertical>
+  </ng-container>
+  <ng-container *ngIf="type === 'switch'" class="mt-2">
+    <nz-switch
+      [ngClass]="classInput"
+      [formControl]="ngControl.control"
+      [nzCheckedChildren]="checkedTemplate"
+      [nzDisabled]="disable"
+      [nzUnCheckedChildren]="unCheckedTemplate"
+      (ngModelChange)="handleChange($event)"
+    ></nz-switch>
+    <ng-template #checkedTemplate>
+      <ng-container *ngIf="dataOnOff.nameOn; else iconOn">{{
+        dataOnOff.nameOff
+      }}</ng-container>
+      <ng-template #iconOn><i nz-icon nzType="check"></i></ng-template>
+    </ng-template>
+    <ng-template #unCheckedTemplate>{{
+      dataOnOff.nameOff
+    }}</ng-template>
+  </ng-container>
+
+  <ng-container *ngIf="type === 'checkbox'">
+    <label
+      [ngClass]="classInput"
+      nz-checkbox
+      [formControl]="ngControl.control"
+      [nzDisabled]="disable"
+      (ngModelChange)="handleChange($event)"
+    >
+      <nz-tag
+        *ngIf="dataOnOff"
+        [ngClass]="ngControl?.control?.value ? colorCodeOn : colorCodeOff"
+      >
+        <span *ngIf="ngControl?.control?.value; else inActive">
+          {{ dataOnOff.nameOn }}
+        </span>
+        <ng-template #inActive>
+          <span> {{ dataOnOff.nameOff }} </span>
+        </ng-template>
+      </nz-tag>
+    </label>
+  </ng-container>
+</nz-form-item>

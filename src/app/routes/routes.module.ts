@@ -21,6 +21,10 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { BlankLayoutComponent } from './blank-layout/blank-layout.component';
 import { TeacherNotClassComponent } from './teacher-not-class/teacher-not-class.component';
 import { TeacherNotAspirationComponent } from './teacher-not-aspiration/teacher-not-aspiration.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ListCriteriaComponent } from './list-criteria/list-criteria.component';
+import { CheckTeachingAssignmentsComponent } from './check-teaching-assignments/check-teaching-assignments.component';
 
 @NgModule({
   declarations: [
@@ -40,14 +44,18 @@ import { TeacherNotAspirationComponent } from './teacher-not-aspiration/teacher-
     MainLayoutComponent,
     BlankLayoutComponent,
     TeacherNotClassComponent,
-    TeacherNotAspirationComponent
+    TeacherNotAspirationComponent,
+    FeedbackComponent,
+    ListCriteriaComponent,
+    CheckTeachingAssignmentsComponent
   ],
   imports: [
     CommonModule,
     RoutesRoutingModule,
     NgZorroAntdModule,
     ComponentsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class RoutesModule { }

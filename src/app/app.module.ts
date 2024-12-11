@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsProviderModule } from './icons-provider.module';
 import { RoutesModule } from './routes/routes.module';
 import { NgZorroAntdModule } from './shared/ng-zorro-ant/ng-zorro-antd.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 registerLocaleData(en);
 
@@ -23,6 +24,7 @@ registerLocaleData(en);
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RoutesModule,
     HttpClientModule,
     BrowserAnimationsModule,

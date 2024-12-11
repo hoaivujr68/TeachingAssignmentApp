@@ -1,0 +1,252 @@
+<div style="height: 90vh">
+  <div class="breadcrumb-container">
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>
+        <a>QUẢN LÝ PHẢN HỒI</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item> Quản lý phản hồi </nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </div>
+  <nz-divider></nz-divider>
+  <div class="filter-container">
+    <div nz-row nzGutter="16">
+      <div nz-col nzSpan="6">
+        <nz-select
+          class="w-100"
+          nzMode="tags"
+          nzPlaceHolder="Tìm kiếm theo tên hoặc mã"
+          [(ngModel)]="request.listTextSearch"
+          (ngModelChange)="nzOnSearch($event)"
+        >
+        </nz-select>
+      </div>
+      <div nz-col nzSpan="4"></div>
+      <div nz-col nzSpan="14" class="d-flex justify-content-end">
+        <app-button-base
+          *ngIf="userRole != 'lanhdao'"
+          iconClass="fa-solid fa-circle-plus"
+          text="Tạo phản hồi"
+          (onClick)="openCreateFeedbackModal()"
+        >
+        </app-button-base>
+        <app-button-base
+          iconClass="fa-solid fa-rotate-right"
+          titleTooltip="Tải lại"
+          [isShowTooltip]="true"
+          (onClick)="handleReload($event)"
+        >
+        </app-button-base>
+      </div>
+      <nz-modal
+        [(nzVisible)]="isModalVisible"
+        nzTitle="Tạo phản hồi"
+        (nzOnCancel)="handleCancel()"
+        (nzOnOk)="handleOk()"
+        [nzFooter]="modalFooter"
+        [nzWidth]="'600px'"
+      >
+        <form nz-form [formGroup]="form" (ngSubmit)="submitFeedbackForm()">
+          <div nz-row nzGutter="16">
+            <div nz-col nzSpan="16">
+              <app-input-text
+                required="true"
+                labelContent="Mã phản hồi"
+                placeholder="Nhập mã phản hồi"
+                formControlName="code"
+              ></app-input-text>
+            </div>
+            <div nz-col nzSpan="8" class="status-container">
+              <div nz-row>
+                <div nz-col nzSpan="24">
+                  <app-label-vertical content="Trạng thái"></app-label-vertical>
+                </div>
+                <div nz-col nzSpan="24">
+                  <span [ngSwitch]="form.getRawValue()?.statusCode">
+                    <app-tag
+                      *ngSwitchCase="3"
+                      class="text-center"
+                      width="100px"
+                      color="success"
+                    >
+                      Phê duyệt
+                    </app-tag>
+                    <app-tag
+                      *ngSwitchCase="2"
+                      class="text-center"
+                      width="100px"
+                      color="processed"
+                    >
+                      Phản hồi
+                    </app-tag>
+                    <app-tag
+                      *ngSwitchCase="1"
+                      class="text-center"
+                      width="100px"
+                      color="processing"
+                    >
+                      Khởi tạo
+                    </app-tag>
+                    <app-tag
+                      *ngSwitchCase="4"
+                      class="text-center"
+                      width="100px"
+                      color="failed"
+                    >
+                      Hủy bỏ
+                    </app-tag>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div nz-col nzSpan="24">
+              <app-input-textarea
+                required="true"
+                labelContent="Nội dung phản hồi"
+                placeholder="Nhập nội dung phản hồi"
+                formControlName="content"
+              ></app-input-textarea>
+            </div>
+          </div>
+        </form>
+        <ng-template #modalFooter>
+          <app-button-base
+            buttonClass="mr-2 color-button-default custom-boder"
+            text="Đóng"
+            (onClick)="handleCancel()"
+          >
+          </app-button-base>
+          <app-button-base
+            *ngIf="isSubmit"
+            text="Phản hồi"
+            (onClick)="handleFeedback(currentData)"
+          >
+          </app-button-base>
+          <app-button-base
+            buttonClass="mr-2 color-button-green custom-boder"
+            text="Lưu"
+            (onClick)="handleOk()"
+          >
+          </app-button-base>
+        </ng-template>
+      </nz-modal>
+    </div>
+  </div>
+  <div class="table-container pt-2">
+    <nz-table
+      #basicTable
+      [nzData]="listOfData"
+      [nzBordered]="false"
+      [nzFrontPagination]="false"
+      [nzShowPagination]="false"
+      [nzScroll]="{ y: scrollY }"
+      [nzFooter]="footer"
+      [nzLoading]="isLoadingTable"
+    >
+      <thead>
+        <tr>
+          <th nzWidth="10%">Mã phản hồi</th>
+          <th *ngIf="userRole == 'lanhdao'" nzWidth="10%">Mã giảng viên</th>
+          <th *ngIf="userRole == 'lanhdao'" nzWidth="15%">Tên giảng viên</th>
+          <th class="text-center" nzWidth="auto">Nội dung phản hồi</th>
+          <th *ngIf="userRole != 'lanhdao'" nzWidth="12%">Trạng thái</th>
+          <th class="text-center" nzWidth="12%">Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{ data?.code }}</td>
+          <td *ngIf="userRole == 'lanhdao'">{{ data?.teacherCode }}</td>
+          <td *ngIf="userRole == 'lanhdao'">{{ data?.teacherName }}</td>
+          <td>{{ data?.content }}</td>
+          <td *ngIf="userRole != 'lanhdao'" nzAlign="center">
+            <span [ngSwitch]="data?.statusCode">
+              <app-tag
+                *ngSwitchCase="3"
+                class="text-center"
+                width="100px"
+                color="success"
+              >
+                Phê duyệt
+              </app-tag>
+              <app-tag
+                *ngSwitchCase="2"
+                class="text-center"
+                width="100px"
+                color="processed"
+              >
+                Phản hồi
+              </app-tag>
+              <app-tag
+                *ngSwitchCase="1"
+                class="text-center"
+                width="100px"
+                color="processing"
+              >
+                Khởi tạo
+              </app-tag>
+              <app-tag
+                *ngSwitchCase="4"
+                class="text-center"
+                width="100px"
+                color="failed"
+              >
+                Hủy bỏ
+              </app-tag>
+            </span>
+          </td>
+          <td>
+            <div class="d-flex justify-content-center">
+              <app-button-base
+                *ngIf="userRole != 'lanhdao'"
+                titleTooltip="Sửa"
+                iconClass="fa-solid fa-pen-to-square"
+                tooltipPlacement="topRight"
+                [isShowTooltip]="true"
+                (onClick)="handleUpdate(data)"
+              >
+              </app-button-base>
+              <app-button-base
+                *ngIf="userRole != 'lanhdao'"
+                titleTooltip="Xóa"
+                [danger]="true"
+                iconClass="far fa-trash-alt"
+                tooltipPlacement="topRight"
+                [isShowTooltip]="true"
+                (onClick)="handleDelete(data)"
+              >
+              </app-button-base>
+              <app-button-base
+                *ngIf="userRole == 'lanhdao'"
+                titleTooltip="Phê duyệt"
+                iconClass="fa-solid fa-circle-check"
+                tooltipPlacement="topRight"
+                [isShowTooltip]="true"
+                (onClick)="handleChangeStatus(data, 'accept')"
+              >
+              </app-button-base>
+              <app-button-base
+                *ngIf="userRole == 'lanhdao'"
+                titleTooltip="Hủy bỏ"
+                [danger]="true"
+                iconClass="fa-solid fa-ban"
+                tooltipPlacement="topRight"
+                [isShowTooltip]="true"
+                (onClick)="handleChangeStatus(data, 'ban')"
+              >
+              </app-button-base>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <ng-template #footer>
+    <app-footer-table
+      [size]="request.size"
+      [page]="request.page"
+      [total]="total"
+      (onPageIndexChange)="nzPageIndexChange($event)"
+    ></app-footer-table>
+  </ng-template>
+</div>

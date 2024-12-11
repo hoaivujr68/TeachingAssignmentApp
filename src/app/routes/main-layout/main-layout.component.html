@@ -14,21 +14,41 @@
       </a>
     </div>
     <ul nz-menu nzMode="inline">
-      <li nz-menu-item class="d-flex align-items-center">
+      <li
+        *ngIf="userRole != 'admin'"
+        nz-menu-item
+        class="d-flex align-items-center"
+        (click)="closeAllSubmenus()"
+      >
         <span nz-icon nzType="dashboard"></span>
         <span><a routerLink="/dashboard">TRANG CHỦ</a></span>
       </li>
-      <li *ngIf="userRole == 'Leader'" nz-menu-item class="d-flex align-items-center">
+      <li
+        *ngIf="userRole == 'lanhdao' || userRole == 'admin'"
+        nz-menu-item
+        class="d-flex align-items-center"
+        (click)="closeAllSubmenus()"
+      >
         <span nz-icon nzType="file-add"></span>
         <span><a routerLink="lecturer/import-data"></a>THÊM DỮ LIỆU </span>
       </li>
 
-      <li nz-submenu nzTitle="QUẢN LÝ DỮ LIỆU" nzIcon="home">
+      <li
+        nz-submenu
+        nzTitle="QUẢN LÝ DỮ LIỆU"
+        nzIcon="home"
+        [nzOpen]="activeMenu === 'management'"
+        (nzOpenChange)="toggleMenu('management')"
+      >
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="lecturer/lecturer-management">Quản lý giảng viên</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
+          <li
+            *ngIf="userRole == 'lanhdao' || userRole == 'admin'"
+            nz-menu-item
+            nzMatchRouter
+          >
             <a routerLink="lecturer/project-management">Quản lý đồ án</a>
           </li>
           <li nz-menu-item nzMatchRouter>
@@ -36,7 +56,11 @@
               >Quản lý nguyện vọng</a
             >
           </li>
-          <li nz-menu-item nzMatchRouter>
+          <li
+            *ngIf="userRole == 'lanhdao' || userRole == 'admin'"
+            nz-menu-item
+            nzMatchRouter
+          >
             <a routerLink="lecturer/professional-group-management"
               >Quản lý nhóm chuyên môn</a
             >
@@ -44,9 +68,19 @@
           <li nz-menu-item nzMatchRouter>
             <a routerLink="lecturer/class-management">Quản lý thời khóa biểu</a>
           </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="lecturer/list-criteria">Cấu hình ràng buộc</a>
+          </li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="PHÂN CÔNG GIẢNG VIÊN" nzIcon="solution">
+      <li
+        *ngIf="userRole != 'admin'"
+        nz-submenu
+        nzTitle="PHÂN CÔNG GIẢNG VIÊN"
+        nzIcon="solution"
+        [nzOpen]="activeMenu === 'assignment'"
+        (nzOpenChange)="toggleMenu('assignment')"
+      >
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="lecturer/teaching-assignment">Giảng dạy</a>
@@ -56,8 +90,20 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu *ngIf="userRole == 'Leader'" nzTitle="KIỂM TRA PHÂN CÔNG" nzIcon="verified">
+      <li
+        nz-submenu
+        *ngIf="userRole == 'lanhdao'"
+        nzTitle="KIỂM TRA PHÂN CÔNG"
+        nzIcon="verified"
+        [nzOpen]="activeMenu === 'check'"
+        (nzOpenChange)="toggleMenu('check')"
+      >
         <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="lecturer/check-assignment"
+              >Kiểm tra phân công</a
+            >
+          </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="lecturer/teacher-not-class"
               >Giảng viên chưa được phân công giảng dạy</a
@@ -80,7 +126,23 @@
           </li>
         </ul>
       </li>
-      <li nz-menu-item class="d-flex align-items-center">
+      <li
+        *ngIf="userRole != 'admin'"
+        nz-menu-item
+        class="d-flex align-items-center"
+        (click)="closeAllSubmenus()"
+      >
+        <span nz-icon nzType="comment"></span>
+        <span
+          ><a routerLink="lecturer/feedback-management"></a>QUẢN LÝ PHẢN
+          HỒI</span
+        >
+      </li>
+      <li
+        nz-menu-item
+        class="d-flex align-items-center"
+        (click)="closeAllSubmenus()"
+      >
         <span nz-icon nzType="setting"></span>
         <span>TÀI KHOẢN</span>
       </li>
@@ -102,8 +164,11 @@
           VIÊN ĐẠI HỌC
         </h5>
         <div class="d-flex" style="margin-right: 32px">
+          <nz-badge style="padding-right: 36px" [nzCount]="listOfData.length">
+            <i style="color: #fff" class="fa-regular fa-bell"></i>
+          </nz-badge>
           <nz-avatar
-            nz-dropdown 
+            nz-dropdown
             [nzDropdownMenu]="menu"
             nzSize="small"
             nzIcon="user"

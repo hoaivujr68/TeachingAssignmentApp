@@ -8,6 +8,11 @@
     .app-layout {
       height: 100vh;
     }
+
+    .custom-badge .ant-badge-count {
+      right: -30px; /* Di chuyển số sang trái (âm) hoặc phải (dương) */
+    }
+    
     
     .menu-sidebar {
       position: relative;
@@ -93,6 +98,13 @@
     }
     
     :host ::ng-deep {
+      .ant-badge-count, .ant-badge-dot, .ant-badge .ant-scroll-number-custom-component {
+        position: absolute;
+        top: 0;
+        right: 32px;
+        transform: translate(50%, -50%);
+        transform-origin: 100% 0%;
+    }
       .ant-layout-sider {
         position: relative;
         min-width: 0;
@@ -164,6 +176,6 @@
       .ant-pagination-item-active a {
         color: #286090;
     }
-    }
+}
     
     
