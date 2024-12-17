@@ -1,4 +1,4 @@
-<div style="height: 90vh; overflow: auto;">
+<div style="height: 90vh; overflow: auto">
   <nz-card nzTitle="Khối lượng giảng dạy">
     <nz-upload
       nzType="drag"
@@ -13,6 +13,15 @@
         Kéo thả hoặc click chuột vào đây để tải tài liệu lên
       </p>
     </nz-upload>
+    <app-button-base
+      style="padding-top: 8px"
+      class="mr-2 float-left"
+      [buttonType]="'primary'"
+      text="Tải tập tin mẫu"
+      iconType="download"
+      (onClick)="downloadTemplateTeacher()"
+    >
+    </app-button-base>
   </nz-card>
 
   <nz-card nzTitle="Nhóm chuyên môn">
@@ -29,6 +38,15 @@
         Kéo thả hoặc click chuột vào đây để tải tài liệu lên
       </p>
     </nz-upload>
+    <app-button-base
+      style="padding-top: 8px"
+      class="mr-2 float-left"
+      [buttonType]="'primary'"
+      text="Tải tập tin mẫu"
+      iconType="download"
+      (onClick)="downloadTemplateProfessional()"
+    >
+    </app-button-base>
   </nz-card>
 
   <nz-card nzTitle="Danh sách lớp học">
@@ -45,8 +63,17 @@
         Kéo thả hoặc click chuột vào đây để tải tài liệu lên
       </p>
     </nz-upload>
+    <app-button-base
+      style="padding-top: 8px"
+      class="mr-2 float-left"
+      [buttonType]="'primary'"
+      text="Tải tập tin mẫu"
+      iconType="download"
+      (onClick)="downloadTemplateClass()"
+    >
+    </app-button-base>
   </nz-card>
-  
+
   <nz-card nzTitle="Danh sách đồ án">
     <nz-upload
       nzType="drag"
@@ -61,6 +88,15 @@
         Kéo thả hoặc click chuột vào đây để tải tài liệu lên
       </p>
     </nz-upload>
+    <app-button-base
+      style="padding-top: 8px"
+      class="mr-2 float-left"
+      [buttonType]="'primary'"
+      text="Tải tập tin mẫu"
+      iconType="download"
+      (onClick)="downloadTemplateProject()"
+    >
+    </app-button-base>
   </nz-card>
 
   <nz-card nzTitle="Nguyện vọng">
@@ -77,5 +113,14 @@
         Kéo thả hoặc click chuột vào đây để tải tài liệu lên
       </p>
     </nz-upload>
+    <app-button-base
+      style="padding-top: 8px"
+      class="mr-2 float-left"
+      [buttonType]="'primary'"
+      text="Tải tập tin mẫu"
+      iconType="download"
+      (onClick)="downloadTemplateAspiration()"
+    >
+    </app-button-base>
   </nz-card>
 </div>

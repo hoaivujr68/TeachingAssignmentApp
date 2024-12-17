@@ -1,0 +1,24 @@
+<div class='demo-app'>
+  <div class='demo-app-main' [class.blurred]="isModalVisible">
+    <full-calendar
+      [options]='calendarOptions'
+    ></full-calendar>
+  </div>
+
+  <!-- Modal hiển thị khi isModalVisible = true -->
+  <ng-container *ngIf="isModalVisible">
+    <div class="modal-overlay">
+      <div class="modal-content">
+        <h2>Thông tin chi tiết lịch</h2>
+        <p><strong>Mã lớp:</strong> {{ selectedEvent?.extendedProps?.courseId }}</p>
+        <p><strong>Mã môn học:</strong> {{ selectedEvent?.extendedProps?.courseCode }}</p>
+        <p><strong>Tên môn học:</strong> {{ selectedEvent?.extendedProps?.courseName }}</p>
+        <p><strong>Thời gian:</strong> {{ selectedEvent?.start | date: 'shortTime' }} - {{ selectedEvent?.end | date: 'shortTime' }}</p>
+        <p><strong>Phòng học:</strong> {{ selectedEvent?.extendedProps?.locale }}</p>
+        <p><strong>Số lượng sinh viên tối đa:</strong> {{ selectedEvent?.extendedProps?.maxEnrol }}</p>
+
+        <button (click)="closeModal()">Đóng</button>
+      </div>
+    </div>
+  </ng-container>
+</div>

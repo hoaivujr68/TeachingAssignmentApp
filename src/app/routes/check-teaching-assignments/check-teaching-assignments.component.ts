@@ -31,13 +31,13 @@ export class CheckTeachingAssignmentsComponent extends LecturerManagementCompone
       {
         code: 'RB4',
         name: 'Một nguyện vọng - Một giảng viên',
-        detail: 'Các nguyện vọng của sinh viên về giáo viên hướng dẫn đồ án phải được đáp ứng và chỉ định đúng 1 giảng viên hướng dẫn cho mỗi nguyện vọng.',
+        detail: 'Mỗi nguyện vọng học chỉ được phân công cho một giảng viên đảm nhận hướng dẫn.',
         type: 'Ràng buộc cứng'
       },
       {
         code: 'RB5',
         name: 'Tổng giờ hướng dẫn - giới hạn',
-        detail: 'Tổng thời gian hướng dẫn và giảng dạy của giảng viên trong kỳ phải nhỏ hơn hoặc bằng 2 lần số giờ trung bình dành cho giảng dạy, nghiên cứu và quản lý.',
+        detail: 'Tổng thời gian hướng dẫn và giảng dạy của giảng viên trong kỳ phải nhỏ hơn hoặc bằng 1.5 lần số giờ trung bình dành cho giảng dạy, nghiên cứu và quản lý.',
         type: 'Ràng buộc cứng'
       },
       {

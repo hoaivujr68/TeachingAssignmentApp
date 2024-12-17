@@ -16,6 +16,8 @@ import { TeacherNotClassComponent } from './teacher-not-class/teacher-not-class.
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ListCriteriaComponent } from './list-criteria/list-criteria.component';
 import { CheckTeachingAssignmentsComponent } from './check-teaching-assignments/check-teaching-assignments.component';
+import { MenuWizardsComponent } from './menu-wizards/menu-wizards.component';
+import { TeacherCalendarComponent } from './teacher-calendar/teacher-calendar.component';
 
 const routes: Routes = [
   { path: 'lecturer-management', component: LecturerManagementComponent },
@@ -33,7 +35,8 @@ const routes: Routes = [
   { path: 'feedback-management', component: FeedbackComponent },
   { path: 'check-assignment', component: ListCriteriaComponent },
   { path: 'list-criteria', component: CheckTeachingAssignmentsComponent },
-
+  { path: 'assignment', component: MenuWizardsComponent },
+  { path: 'teacher-calendar', component: TeacherCalendarComponent },
 ];
 
 @NgModule({

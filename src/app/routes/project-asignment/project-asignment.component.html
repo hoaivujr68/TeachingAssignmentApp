@@ -23,13 +23,6 @@
       <div nz-col nzSpan="4"></div>
       <div nz-col nzSpan="14" class="d-flex justify-content-end">
         <app-button-base
-          *ngIf="userRole == 'lanhdao'"
-          text="Phân công"
-          iconClass="fa-solid fa-chalkboard-user"
-          (onClick)="hanleClick($event)"
-        >
-        </app-button-base>
-        <app-button-base
           iconClass="fas fa-download"
           text="Xuất Excel giảng viên"
           (onClick)="handleExportData()"
@@ -64,16 +57,25 @@
     >
       <thead>
         <tr>
+          <th nzWidth="3%"></th>
           <th nzWidth="15%">Giảng viên</th>
           <th class="text-left" nzWidth="10%">Mã sinh viên</th>
           <th class="text-center" nzWidth="12%">Tên sinh viên</th>
-          <th class="text-left" nzWidth="auto">Đề tài</th>
+          <th class="text-center" nzWidth="auto">Đề tài</th>
           <th class="text-left" nzWidth="8%">Mã đồ án</th>
           <th class="text-center" nzWidth="10%">Hành động</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
+          <td>
+            <label
+              nz-checkbox
+              [nzChecked]="selectedIds.has(data.id)"
+              (nzCheckedChange)="onItemChecked(data.id, $event)"
+            >
+            </label>
+          </td>
           <td>{{ data?.teacherCode }} - {{ data?.teacherName }}</td>
           <td>{{ data?.studentId }}</td>
           <td class="text-center">{{ data?.studentName }}</td>
@@ -95,6 +97,15 @@
       </tbody>
     </nz-table>
   </div>
+
+  <nz-modal
+    [(nzVisible)]="isConfirmPopupVisible"
+    nzTitle="Xác nhận đổi phân công"
+    (nzOnCancel)="cancelChangeAssignment()"
+    (nzOnOk)="confirmChangeAssignment()"
+  >
+    <p>Bạn có chắc chắn muốn đổi phân công cho giảng viên đã chọn không?</p>
+  </nz-modal>
 
   <nz-modal
     [(nzVisible)]="isModalVisible"
@@ -189,7 +200,10 @@
         (onClick)="handleCancel()"
       >
       </app-button-base>
-      <app-button-base text="Phân thử" (onClick)="handleTryAssignment()"></app-button-base>
+      <app-button-base
+        text="Phân thử"
+        (onClick)="handleTryAssignment()"
+      ></app-button-base>
       <app-button-base
         buttonClass="mr-2 color-button-green custom-boder"
         text="Lưu"

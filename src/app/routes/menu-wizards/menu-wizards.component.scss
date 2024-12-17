@@ -1,0 +1,38 @@
+.steps-container {
+  display: flex;
+  justify-content: space-around; /* Căn giữa theo chiều ngang */
+}
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Căn các button về phía bên phải */
+}
+
+:host ::ng-deep {
+  .horizontal-checkbox-group .ant-checkbox-group-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; /* Khoảng cách dọc giữa các hàng */
+  }
+  .horizontal-checkbox-group .ant-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  .ant-checkbox + span {
+    padding-right: 8px;
+    padding-left: 8px;
+    padding-top: 8px;
+  }
+.ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
+  background: #286090;
+}
+}
+.text-paragraph {
+  font-size: 14px; /* Kích thước chữ */
+  font-weight: normal; /* Chữ không đậm */
+  text-align: left; /* Căn lề bên trái */
+  margin: 0; /* Bỏ khoảng cách mặc định */
+  padding: 6px 0px;
+}
+
+
+

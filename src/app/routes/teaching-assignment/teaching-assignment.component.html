@@ -23,13 +23,6 @@
       <div nz-col nzSpan="4"></div>
       <div nz-col nzSpan="14" class="d-flex justify-content-end">
         <app-button-base
-          *ngIf="userRole == 'lanhdao'"
-          text="Phân công"
-          iconClass="fa-solid fa-chalkboard-user"
-          (onClick)="hanleClick($event)"
-        >
-        </app-button-base>
-        <app-button-base
           iconClass="fas fa-download"
           text="Xuất Excel giảng viên"
           (onClick)="handleExportData()"
@@ -64,11 +57,12 @@
     >
       <thead>
         <tr>
+          <th nzWidth="3%"></th>
           <th nzWidth="8%">ID lớp</th>
           <th nzWidth="15%">Giảng viên</th>
-          <th class="text-left" nzWidth="15%">Tên môn học</th>
-          <th class="text-left" nzWidth="10%">Loại môn học</th>
-          <th class="text-left" nzWidth="10%">Mã môn học</th>
+          <th nzWidth="15%">Tên môn học</th>
+          <th nzWidth="10%">Loại môn học</th>
+          <th nzWidth="10%">Mã môn học</th>
           <th class="text-center" nzWidth="10%">Nhóm ngành</th>
           <th class="text-center" nzWidth="auto">Lịch học</th>
           <th class="text-center" nzWidth="10%">Hành động</th>
@@ -76,11 +70,19 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of basicTable.data">
+          <td>
+            <label
+              nz-checkbox
+              [nzChecked]="selectedIds.has(data.id)"
+              (nzCheckedChange)="onItemChecked(data.id, $event)"
+            >
+            </label>
+          </td>
           <td>{{ data?.code }}</td>
           <td>{{ data?.teacherCode }} - {{ data?.teachingName }}</td>
           <td>{{ data?.name }}</td>
-          <td class="text-center">{{ data?.type }}</td>
-          <td class="text-center">{{ data?.courseName }}</td>
+          <td>{{ data?.type }}</td>
+          <td>{{ data?.courseName }}</td>
           <td class="text-center">{{ data?.groupName }}</td>
           <td>{{ data?.timeTable }}</td>
           <td>
@@ -99,6 +101,15 @@
       </tbody>
     </nz-table>
   </div>
+  <nz-modal
+    [(nzVisible)]="isConfirmPopupVisible"
+    nzTitle="Xác nhận đổi phân công"
+    (nzOnCancel)="cancelChangeAssignment()"
+    (nzOnOk)="confirmChangeAssignment()"
+  >
+    <p>Bạn có chắc chắn muốn đổi phân công cho giảng viên đã chọn không?</p>
+  </nz-modal>
+
   <nz-modal
     [(nzVisible)]="isModalVisible"
     nzTitle="Thay đổi phân công cho lớp {{ titleModal }}"

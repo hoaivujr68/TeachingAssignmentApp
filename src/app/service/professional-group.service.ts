@@ -21,4 +21,23 @@ export class ProfessionalGroupService {
       headers: this.createHeaders()
     });
   }
+
+  downloadTemplateProfessional(): void {
+    const url = `${this.url}/download-template`;
+    this.httpClient.get(url, { responseType: 'blob' }).subscribe({
+      next: (response) => {
+        const blob = new Blob([response], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'ProfessionalTemplate.xlsx';
+        link.click();
+        window.URL.revokeObjectURL(link.href);
+      },
+      error: (err) => {
+        console.error('Error downloading the template', err);
+      },
+    });
+  }
 }

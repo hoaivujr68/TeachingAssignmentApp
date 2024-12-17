@@ -11,6 +11,7 @@ import { InputTextComponent } from './input-text/input-text.component';
 import { InputTextareaComponent } from './input-textarea/input-textarea.component';
 import { TagComponent } from './tag/tag.component';
 import { InputNumberComponent } from './input-number/input-number.component';
+import { RadioComponent } from './radio/radio.component';
 
 const components: any[] = [
       FooterTableComponent,
@@ -21,11 +22,12 @@ const components: any[] = [
       InputTextComponent, 
       InputTextareaComponent,
       TagComponent,
-      InputNumberComponent
+      InputNumberComponent,
+      RadioComponent
 ]
 
 @NgModule({
-      declarations: [...components, OnOffComponent, LabelVerticalComponent, InputTextComponent, InputTextareaComponent, TagComponent, InputNumberComponent,],
+      declarations: [...components, OnOffComponent, LabelVerticalComponent, InputTextComponent, InputTextareaComponent, TagComponent, InputNumberComponent, RadioComponent,],
       imports: [
             CommonModule,
             NgZorroAntdModule,

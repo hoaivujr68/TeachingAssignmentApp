@@ -47,22 +47,46 @@
   <div class="table-container pt-2">
     <nz-table
       #basicTable
-      [nzData]="listOfData"
+      [nzData]="paginatedData"
       [nzBordered]="false"
       [nzFrontPagination]="false"
       [nzShowPagination]="false"
       [nzScroll]="{ y: scrollY }"
       [nzLoading]="isLoadingTable"
+      [nzFooter]="footer"
     >
       <thead>
         <tr>
-          <th class="text-left" nzWidth="auto">Mã giảng viên</th>
-          <th class="text-left" nzWidth="auto">Tên giảng viên</th>
-          <th class="text-left" nzWidth="auto">Chi tiết lỗi</th>
+          <th nzWidth="15%">Mã giảng viên</th>
+          <th nzWidth="20%">Tên giảng viên</th>
+          <th nzWidth="auto">Chi tiết lỗi</th>
+          <th nzWidth="15%">Xem chi tiết</th>
         </tr>
       </thead>
       <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{ data?.code }}</td>
+          <td>{{ data?.name }}</td>
+          <td>{{ data?.message }}</td>
+          <td>
+            <app-button-base
+              iconClass="fa-solid fa-up-right-from-square"
+              isShowTooltip="true"
+              titleTooltip="Xem chi tiết"
+              (onClick)="handleChange(data.code)"
+            >
+            </app-button-base>
+          </td>
+        </tr>
       </tbody>
     </nz-table>
   </div>
+  <ng-template #footer>
+    <app-footer-table
+      [size]="pageSize"
+      [page]="currentPage"
+      [total]="total"
+      (onPageIndexChange)="nzPageIndexChange1($event)"
+    ></app-footer-table>
+  </ng-template>
 </div>

@@ -1,0 +1,33 @@
+<nz-form-item>
+  <ng-container *ngIf="!hideLabel">
+    <app-label-vertical
+      *ngIf="!labelHorizontal"
+      nz-col
+      nzSpan="24"
+      [content]="labelContent"
+      [required]="required"
+      style="font-weight: 500;"
+    >
+    </app-label-vertical>
+  </ng-container>
+  <nz-form-control
+    [nzSpan]="span"
+  >
+    <nz-radio-group
+      [ngClass]="radioGroupClass"
+      (ngModelChange)="onChange.emit($event)"
+      [formControl]="ngControl.control"
+      nzName="radioApp"
+      [nzDisabled]="disabled"
+    >
+      <label
+        styleRadio="styleRadio"
+        [ngClass]="{ 'radio-square': styleRadio }"
+        *ngFor="let data of listDataRadio"
+        nz-radio
+        [nzValue]="data[valueField]"
+        >{{ data[labelField] }}</label
+      >
+    </nz-radio-group>
+  </nz-form-control>
+</nz-form-item>

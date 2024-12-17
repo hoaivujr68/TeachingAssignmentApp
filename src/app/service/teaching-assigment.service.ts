@@ -23,6 +23,12 @@ export class TeachingAssigmentService {
     });
   }
 
+  getSchedule(): Observable<any> {
+    return this.httpClient.get(`${this.url}/schedule`, {
+      headers: this.createHeaders()
+    });
+  }
+
   // Filter teaching assignments chưa được phân công
   getTeachingNotAssignmentFilter(payload: any): Observable<any> {
     return this.httpClient.post(`${this.url}/filter-not-assignment`, payload, {
@@ -32,6 +38,12 @@ export class TeachingAssigmentService {
 
   getTeacherNotAssignmentFilter(payload: any): Observable<any> {
     return this.httpClient.post(`${this.url}/teacher-not-assignment`, payload, {
+      headers: this.createHeaders()
+    });
+  }
+
+  swapTeacherAssignment(payload: any): Observable<any> {
+    return this.httpClient.post(`${this.url}/swap-assignment`, payload, {
       headers: this.createHeaders()
     });
   }
@@ -57,6 +69,18 @@ export class TeachingAssigmentService {
   // Phương thức này để lấy các teaching assignments
   teachingAssignment(): Observable<any> {
     return this.httpClient.get('https://localhost:7286/api/assignment/teaching', {
+      headers: this.createHeaders()
+    });
+  }
+
+  cuckooTeachingAssignment(): Observable<any> {
+    return this.httpClient.get('https://localhost:7286/api/assignment/cuckoo-teaching', {
+      headers: this.createHeaders()
+    });
+  }
+
+  getResultModel(): Observable<any> {
+    return this.httpClient.get(`${this.url}/result`, {
       headers: this.createHeaders()
     });
   }

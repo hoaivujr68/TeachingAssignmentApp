@@ -1,0 +1,363 @@
+<nz-spin
+  [nzSpinning]="isSpinning"
+  [nzTip]="
+    currentStep === 1
+      ? 'Hệ thống đang tiến hành phân công...'
+      : 'Hệ thống đang tiến hành lưu phân công...'
+  "
+  >>
+  <div style="height: 90vh; overflow: auto">
+    <div class="breadcrumb-container">
+      <nz-breadcrumb>
+        <nz-breadcrumb-item>
+          <a>PHÂN CÔNG</a>
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item> Phân công </nz-breadcrumb-item>
+      </nz-breadcrumb>
+    </div>
+
+    <div style="padding: 16px 240px 0 240px">
+      <nz-steps [nzCurrent]="currentStep" nzSize="small">
+        <nz-step nzTitle="Thêm dữ liệu"></nz-step>
+        <nz-step nzTitle="Cấu hình ràng buộc"></nz-step>
+        <nz-step nzTitle="Kết quả"></nz-step>
+        <nz-step nzTitle="Chốt phân công"></nz-step>
+      </nz-steps>
+    </div>
+
+    <div style="display: flex; justify-content: center; position: relative">
+      <div style="width: 60%; padding: 36px 36px 0 36px">
+        <nz-card *ngIf="currentStep == 0" nzTitle="Khối lượng giảng dạy">
+          <nz-upload
+            nzType="drag"
+            [nzMultiple]="true"
+            nzAction="https://localhost:7286/api/teacher/import"
+            (nzChange)="handleChange($event)"
+          >
+            <p class="ant-upload-drag-icon">
+              <span nz-icon nzType="upload" style="color: #286090"></span>
+            </p>
+            <p class="ant-upload-text">
+              Kéo thả hoặc click chuột vào đây để tải tài liệu lên
+            </p>
+          </nz-upload>
+          <p style="color: #ff9966; margin-top: 8px">
+            Dữ liệu giảng viên đã có trong hệ thống. Nếu muốn dùng dữ liệu mới,
+            bạn có thể import tệp, nếu không hãy giữ nguyên dữ liệu hiện tại.
+          </p>
+          <app-button-base
+            class="mr-2 float-left"
+            [buttonType]="'primary'"
+            text="Tải tập tin mẫu"
+            iconType="download"
+            (onClick)="downloadTemplateTeacher()"
+          >
+          </app-button-base>
+        </nz-card>
+
+        <nz-card *ngIf="currentStep == 0" nzTitle="Nhóm chuyên môn">
+          <nz-upload
+            nzType="drag"
+            [nzMultiple]="true"
+            nzAction="https://localhost:7286/api/professional-group/import"
+            (nzChange)="handleChange($event)"
+          >
+            <p class="ant-upload-drag-icon">
+              <span nz-icon nzType="upload" style="color: #286090"></span>
+            </p>
+            <p class="ant-upload-text">
+              Kéo thả hoặc click chuột vào đây để tải tài liệu lên
+            </p>
+          </nz-upload>
+          <p style="color: #ff9966; margin-top: 8px">
+            Dữ liệu nhóm chuyên môn đã có trong hệ thống. Nếu muốn dùng dữ liệu
+            mới, bạn có thể import tệp, nếu không hãy giữ nguyên dữ liệu hiện
+            tại.
+          </p>
+          <app-button-base
+            class="mr-2 float-left"
+            [buttonType]="'primary'"
+            text="Tải tập tin mẫu"
+            iconType="download"
+            (onClick)="downloadTemplateProfessional()"
+          >
+          </app-button-base>
+        </nz-card>
+
+        <nz-card *ngIf="currentStep == 0" nzTitle="Danh sách lớp học">
+          <nz-upload
+            nzType="drag"
+            [nzMultiple]="true"
+            nzAction="https://localhost:7286/api/class/import"
+            (nzChange)="handleChange($event)"
+          >
+            <p class="ant-upload-drag-icon">
+              <span nz-icon nzType="upload" style="color: #286090"></span>
+            </p>
+            <p class="ant-upload-text">
+              Kéo thả hoặc click chuột vào đây để tải tài liệu lên
+            </p>
+          </nz-upload>
+          <p style="color: #ff9966; margin-top: 8px">
+            Dữ liệu lớp học đã có trong hệ thống. Nếu muốn dùng dữ liệu mới, bạn
+            có thể import tệp, nếu không hãy giữ nguyên dữ liệu hiện tại.
+          </p>
+          <app-button-base
+            class="mr-2 float-left"
+            [buttonType]="'primary'"
+            text="Tải tập tin mẫu"
+            iconType="download"
+            (onClick)="downloadTemplateClass()"
+          >
+          </app-button-base>
+        </nz-card>
+
+        <nz-card *ngIf="currentStep == 0" nzTitle="Danh sách đồ án">
+          <nz-upload
+            nzType="drag"
+            [nzMultiple]="true"
+            nzAction="https://localhost:7286/api/project/import"
+            (nzChange)="handleChange($event)"
+          >
+            <p class="ant-upload-drag-icon">
+              <span nz-icon nzType="upload" style="color: #286090"></span>
+            </p>
+            <p class="ant-upload-text">
+              Kéo thả hoặc click chuột vào đây để tải tài liệu lên
+            </p>
+          </nz-upload>
+          <p style="color: #ff9966; margin-top: 8px">
+            Dữ liệu đồ án đã có trong hệ thống. Nếu muốn dùng dữ liệu mới, bạn
+            có thể import tệp, nếu không hãy giữ nguyên dữ liệu hiện tại.
+          </p>
+          <app-button-base
+            class="mr-2 float-left"
+            [buttonType]="'primary'"
+            text="Tải tập tin mẫu"
+            iconType="download"
+            (onClick)="downloadTemplateProject()"
+          >
+          </app-button-base>
+        </nz-card>
+
+        <nz-card *ngIf="currentStep == 0" nzTitle="Nguyện vọng">
+          <nz-upload
+            nzType="drag"
+            [nzMultiple]="true"
+            nzAction="https://localhost:7286/api/aspiration/import"
+            (nzChange)="handleChange($event)"
+          >
+            <p class="ant-upload-drag-icon">
+              <span nz-icon nzType="upload" style="color: #286090"></span>
+            </p>
+            <p class="ant-upload-text">
+              Kéo thả hoặc click chuột vào đây để tải tài liệu lên
+            </p>
+          </nz-upload>
+          <p style="color: #ff9966; margin-top: 8px">
+            Dữ liệu nguyện vọng đã có trong hệ thống. Nếu muốn dùng dữ liệu mới,
+            bạn có thể import tệp, nếu không hãy giữ nguyên dữ liệu hiện tại.
+          </p>
+          <app-button-base
+            class="mr-2 float-left"
+            [buttonType]="'primary'"
+            text="Tải tập tin mẫu"
+            iconType="download"
+            (onClick)="downloadTemplateAspiration()"
+          >
+          </app-button-base>
+        </nz-card>
+
+        <nz-card *ngIf="currentStep == 1">
+          <form nz-form [formGroup]="form">
+            <app-radio
+              span="24"
+              labelContent="Loại phân công"
+              [listDataRadio]="listTypeAssignment"
+              formControlName="typeAssignment"
+              (onChange)="handleChangeTypeAssignment($event)"
+            ></app-radio>
+            <app-radio
+              span="24"
+              labelContent="Giải thuật"
+              [listDataRadio]="listAlgorithm"
+              formControlName="algorithm"
+            ></app-radio>
+          </form>
+          <div
+            style="
+              border-bottom: 1px solid rgb(233, 233, 233);
+              padding-bottom: 16px;
+            "
+          >
+            <span style="font-weight: 500">Cấu hình ràng buộc</span>
+            <label
+              style="padding-left: 16px"
+              nz-checkbox
+              [(ngModel)]="allChecked"
+              (ngModelChange)="updateAllChecked()"
+              [nzIndeterminate]="indeterminate"
+            >
+              Chọn tất cả
+            </label>
+          </div>
+          <br />
+          <nz-checkbox-group
+            [(ngModel)]="checkOptionsOne"
+            (ngModelChange)="updateSingleChecked()"
+            class="horizontal-checkbox-group"
+          ></nz-checkbox-group>
+        </nz-card>
+
+        <nz-card *ngIf="currentStep == 2">
+          <h5 class="text-center pb-2">
+            Kết quả phân công sử dụng giải thuật {{ algorithmText }}
+            <div style="padding: 16px 16px">
+              <div nz-row nzGutter="16">
+                <div nz-col nzSpan="10">
+                  <p
+                    *ngFor="let data of listResultHeader"
+                    class="text-paragraph"
+                  >
+                    <span>{{ data.label }}</span> :
+                    <span style="font-weight: 500">{{ data.value }}</span>
+                  </p>
+                </div>
+
+                <div
+                  *ngIf="form.get('typeAssignment')?.value == 'teaching'"
+                  nz-col
+                  nzSpan="14"
+                  class="d-flex justify-content-end"
+                >
+                  <app-button-base
+                    iconClass="fas fa-download"
+                    text="Xuất Excel giảng viên"
+                    (onClick)="handleExportData()"
+                  >
+                  </app-button-base>
+                  <app-button-base
+                    iconClass="fas fa-download"
+                    text="Xuất Excel theo lớp"
+                    (onClick)="handleExportDataClass()"
+                  >
+                  </app-button-base>
+                </div>
+                <div
+                  *ngIf="form.get('typeAssignment')?.value == 'projecting'"
+                  nz-col
+                  nzSpan="14"
+                  class="d-flex justify-content-end"
+                >
+                  <app-button-base
+                    iconClass="fas fa-download"
+                    text="Xuất Excel giảng viên"
+                    (onClick)="handleExportDataProject()"
+                  >
+                  </app-button-base>
+                  <app-button-base
+                    iconClass="fas fa-download"
+                    text="Xuất Excel đồ án"
+                    (onClick)="handleExportDataAspiration()"
+                  >
+                  </app-button-base>
+                </div>
+              </div>
+            </div>
+            <nz-table
+              #basicTable
+              [nzData]="listResultTable"
+              [nzBordered]="false"
+              [nzFrontPagination]="false"
+              [nzShowPagination]="false"
+              [nzLoading]="isLoadingTable"
+            >
+              <thead>
+                <tr>
+                  <th nzWidth="8%">STT</th>
+                  <th nzWidth="auto">Tiêu chí</th>
+                  <th class="text-left" nzWidth="25%">Thỏa mãn</th>
+                  <th class="text-left" nzWidth="25%">Không thỏa mãn</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of basicTable.data; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ data?.label }}</td>
+                  <td>{{ data?.value }} {{ data?.category }}</td>
+                  <td *ngIf="form.get('typeAssignment')?.value == 'teaching' && data.code == 'RB1'">
+                    {{ totalClass - data?.value }} {{ data?.category }}
+                  </td>
+                  <td *ngIf="form.get('typeAssignment')?.value == 'teaching' && data.code != 'RB1'">
+                    {{ totalTeacher - data?.value }} {{ data?.category }}
+                  </td>
+                  <td *ngIf="form.get('typeAssignment')?.value == 'projecting' && data.code == 'RB4'">
+                    {{ totalClass - data?.value }} {{ data?.category }}
+                  </td>
+                  <td *ngIf="form.get('typeAssignment')?.value == 'projecting' && (data.code == 'RB5' || data.code == 'RB6')">
+                    {{ totalTeacher - data?.value }} {{ data?.category }}
+                  </td>
+                  <td *ngIf="form.get('typeAssignment')?.value == 'projecting' && data.code == 'RB9'">
+                    {{ totalAspirations - data?.value }} {{ data?.category }}
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </h5>
+        </nz-card>
+
+        <nz-card>
+          <nz-result
+            *ngIf="currentStep == 3"
+            nzStatus="success"
+            nzTitle="Phân công cho giảng viên thành công"
+          >
+            <div nz-result-extra>
+              <app-button-base
+                *ngIf="currentStep > 0"
+                style="color: #000; background-color: #fff"
+                buttonClass="mr-2 color-button-default custom-boder"
+                text="Quay lại"
+                (onClick)="handleChangeBack()"
+              >
+              </app-button-base>
+              <app-button-base
+                *ngIf="currentStep == 3"
+                buttonClass="mr-2 color-button-green custom-boder"
+                text="Xem kết quả"
+                (onClick)="handleViewResult()"
+              >
+              </app-button-base>
+            </div>
+          </nz-result>
+        </nz-card>
+
+        <div
+          class="button-container"
+          style="display: flex; justify-content: flex-end; margin-top: 16px"
+        >
+          <app-button-base
+            *ngIf="currentStep > 0 && currentStep < 3"
+            style="color: #000; background-color: #fff"
+            buttonClass="mr-2 color-button-default custom-boder"
+            text="Quay lại"
+            (onClick)="handleChangeBack()"
+          >
+          </app-button-base>
+          <app-button-base
+            *ngIf="currentStep < 2"
+            text="Tiếp tục"
+            (onClick)="handleChangeNext()"
+          >
+          </app-button-base>
+          <app-button-base
+            *ngIf="currentStep == 2"
+            text="Chốt phân công"
+            (onClick)="handleApproved()"
+          >
+          </app-button-base>
+        </div>
+      </div>
+    </div>
+  </div>
+</nz-spin>

@@ -32,7 +32,24 @@
         <span nz-icon nzType="file-add"></span>
         <span><a routerLink="lecturer/import-data"></a>THÊM DỮ LIỆU </span>
       </li>
-
+      <li
+        *ngIf="userRole == 'lanhdao' || userRole == 'admin'"
+        nz-menu-item
+        class="d-flex align-items-center"
+        (click)="closeAllSubmenus()"
+      >
+        <span nz-icon nzType="build"></span>
+        <span><a routerLink="lecturer/assignment"></a>PHÂN CÔNG GIẢNG DẠY</span>
+      </li>
+      <li
+        *ngIf="userRole != 'lanhdao' && userRole != 'admin'"
+        nz-menu-item
+        class="d-flex align-items-center"
+        (click)="closeAllSubmenus()"
+      >
+        <span nz-icon nzType="schedule"></span>
+        <span><a routerLink="lecturer/teacher-calendar"></a>LỊCH LÀM VIỆC </span>
+      </li>
       <li
         nz-submenu
         nzTitle="QUẢN LÝ DỮ LIỆU"
@@ -76,7 +93,7 @@
       <li
         *ngIf="userRole != 'admin'"
         nz-submenu
-        nzTitle="PHÂN CÔNG GIẢNG VIÊN"
+        nzTitle="KẾT QUẢ PHÂN CÔNG"
         nzIcon="solution"
         [nzOpen]="activeMenu === 'assignment'"
         (nzOpenChange)="toggleMenu('assignment')"
@@ -100,9 +117,7 @@
       >
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="lecturer/check-assignment"
-              >Kiểm tra phân công</a
-            >
+            <a routerLink="lecturer/check-assignment">Kiểm tra phân công</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="lecturer/teacher-not-class"

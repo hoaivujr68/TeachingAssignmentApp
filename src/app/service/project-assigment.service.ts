@@ -52,6 +52,23 @@ export class ProjectAssigmentService {
     });
   }
 
+  swapTeacherAssignment(payload: any): Observable<any> {
+    return this.httpClient.post(`${this.url}/swap-assignment`, payload, {
+      headers: this.createHeaders()
+    });
+  }
+
+  getResultModel(): Observable<any> {
+    return this.httpClient.get(`${this.url}/result`, {
+      headers: this.createHeaders()
+    });
+  }
+
+  getResultErrorModel(): Observable<any> {
+    return this.httpClient.get(`${this.url}/result-error`, {
+      headers: this.createHeaders()
+    });
+  }
 
   projectAssignment(){
     return this.httpClient.get('https://localhost:7286/api/assignment/aspirating', {

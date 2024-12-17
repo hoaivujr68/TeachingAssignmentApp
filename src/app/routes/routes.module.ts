@@ -25,7 +25,18 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ListCriteriaComponent } from './list-criteria/list-criteria.component';
 import { CheckTeachingAssignmentsComponent } from './check-teaching-assignments/check-teaching-assignments.component';
+import { MenuWizardsComponent } from './menu-wizards/menu-wizards.component';
+import { TeacherCalendarComponent } from './teacher-calendar/teacher-calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
 
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+  timeGridPlugin
+]);
 @NgModule({
   declarations: [
     LecturerManagementComponent,
@@ -47,15 +58,18 @@ import { CheckTeachingAssignmentsComponent } from './check-teaching-assignments/
     TeacherNotAspirationComponent,
     FeedbackComponent,
     ListCriteriaComponent,
-    CheckTeachingAssignmentsComponent
+    CheckTeachingAssignmentsComponent,
+    MenuWizardsComponent,
+    TeacherCalendarComponent
   ],
   imports: [
+    FullCalendarModule,
     CommonModule,
     RoutesRoutingModule,
     NgZorroAntdModule,
     ComponentsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class RoutesModule { }
