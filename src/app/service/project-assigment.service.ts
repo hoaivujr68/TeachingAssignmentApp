@@ -89,6 +89,13 @@ export class ProjectAssigmentService {
     });
   }
 
+  exportProjectAssignmentByQuota() {
+    return this.httpClient.get(this.url + '/export-quota', {
+      headers: this.createHeaders(),
+      responseType: 'blob'  // Đảm bảo API trả về kiểu file binary
+    });
+  }
+
   exportAspirationAssignment() {
     return this.httpClient.get(this.url + '/export-aspiration', {
       headers: this.createHeaders(),

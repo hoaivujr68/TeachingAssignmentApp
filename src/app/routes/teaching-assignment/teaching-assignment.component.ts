@@ -276,6 +276,30 @@ export class TeachingAssignmentComponent extends LecturerManagementComponent {
       this.isLoadingTable = false;
     }
   }
+
+  async handleExportDataQuota() {
+    this.isLoadingTable = true;
+    try {
+      // Gọi API và chờ đợi phản hồi blob
+      const res: Blob = await this.teachingAssigmentService.exportTeachingAssignmentByQuota().toPromise();
+
+      // Tạo URL tạm thời cho file blob
+      const blob = new Blob([res], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }); // Thay đổi type nếu cần
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'TeachingAssignmentStatistical.xlsx';  // Tên file muốn tải xuống
+      link.click();  // Mô phỏng việc nhấp chuột vào link tải xuống
+
+      // Thông báo thành công
+      this.message.success("Xuất file thống kê phân công thành công");
+    } catch (error) {
+      // Xử lý lỗi
+      this.message.error("Xuất file thống kê phân công thất bại!!!");
+    } finally {
+      this.isLoadingTable = false;
+    }
+  }
+
   selectedIds: Set<string> = new Set(); // Chứa ID các bản ghi được chọn
   isConfirmPopupVisible: boolean = false; // Trạng thái popup xác nhận
 

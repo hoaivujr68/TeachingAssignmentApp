@@ -48,6 +48,13 @@ export class TeachingAssigmentService {
     });
   }
 
+  exportTeachingAssignmentByQuota() {
+    return this.httpClient.get(this.url + '/export-quota', {
+      headers: this.createHeaders(),
+      responseType: 'blob'  // Đảm bảo API trả về kiểu file binary
+    });
+  }
+
   updateTeachingAssignment(payload: any): Observable<any> {
     return this.httpClient.put(`${this.url}`, payload, {
       headers: this.createHeaders()

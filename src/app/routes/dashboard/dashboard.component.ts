@@ -35,7 +35,7 @@ export class DashboardComponent {
     '#AFDBF5',
     '#B0C4DE',
   ];
-
+  isSpinning: boolean = false;
   leftSideData: any[] = [];
 
   constructor(
@@ -132,6 +132,7 @@ export class DashboardComponent {
   }
 
   async handleReload(ev: any) {
+    this.isSpinning = true;
     if(this.userRole == 'lanhdao') {
       await this.generalService.refreshETLGeneral()
       .toPromise()
@@ -140,6 +141,7 @@ export class DashboardComponent {
           this.leftSideData = res.filter((item) => item.type == 'total-statistics');
           this.listDataClassAsignment = res.filter((item) => item.type == 'per-assigned-classes');
           this.listDataAspirationAsignment = res.filter((item) => item.type == 'per-assigned-wishes');
+          this.isSpinning = false;
           this.message.success("Thống kê lại dữ liệu thành công");
         }
       })
@@ -152,6 +154,7 @@ export class DashboardComponent {
           this.listTotalGdPer = res.filter((item) => item.type == 'gd-ratio-assigned');
           this.listPerGdTeaching = res.filter((item) => item.type == 'per-gd-teaching');
           this.listPerGdInstruct = res.filter((item) => item.type == 'per-gd-instruct');
+          this.isSpinning = false;
           this.message.success("Thống kê lại dữ liệu thành công");
         }
       })
@@ -234,7 +237,7 @@ export class DashboardComponent {
     new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['Số lượng nguyện vọng không được phân công', 'Số lượng nguyện vọng',],
+        labels: ['Số lượng đồ án không được phân công', 'Số lượng đồ án',],
         datasets: [{
           data: this.listDataAspirationAsignment.map((item) => item.value),
           backgroundColor: ['#0077c0', '#B0C4DE'],
@@ -246,7 +249,7 @@ export class DashboardComponent {
         plugins: {
           title: {
             display: true,
-            text: "Tỷ lệ nguyện vọng được phân",
+            text: "Tỷ lệ đồ án được phân",
             font: {
               family: 'Quicksand, sans-serif',
               size: 14,

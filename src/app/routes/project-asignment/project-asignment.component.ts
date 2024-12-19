@@ -260,6 +260,29 @@ export class ProjectAsignmentComponent extends LecturerManagementComponent {
     }
   }
 
+  async handleExportDataQuota() {
+    this.isLoadingTable = true;
+    try {
+      // Gọi API và chờ đợi phản hồi blob
+      const res: Blob = await this.projectAssigmentService.exportProjectAssignmentByQuota().toPromise();
+
+      // Tạo URL tạm thời cho file blob
+      const blob = new Blob([res], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }); // Thay đổi type nếu cần
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'ProjectAssignmentStatistical.xlsx';  // Tên file muốn tải xuống
+      link.click();  // Mô phỏng việc nhấp chuột vào link tải xuống
+
+      // Thông báo thành công
+      this.message.success("Xuất file thống kê phân công thành công");
+    } catch (error) {
+      // Xử lý lỗi
+      this.message.error("Xuất file thống kê phân công thất bại!!!");
+    } finally {
+      this.isLoadingTable = false;
+    }
+  }
+
   async handleExportData() {
     this.isLoadingTable = true;
     try {
